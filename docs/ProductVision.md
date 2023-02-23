@@ -10,8 +10,15 @@ To discourage the waste of resources, by promoting circular economy and creating
  - Feature 2 - Allow users to chat with each other and make offers on various items
  - Feature 3 - Allow users to create trading events
  - Feature 4 - Show users items that they might be interested in, given previous trades and searches
+ - Feature 5 - Allow users to follow each other so they can get update posts.
+ - Feature 6 - Allow users to review each other.
+ - Feature 7 - Allow users to mark items as favorite
 
 ### Assumptions and dependencies
+- Internet
 - Database for users and their items
 - Calendar or scheduling app on the users' phone
 - Location services (maybe Google Maps)
+- Allow access to the camera and gallery
+- 
+
