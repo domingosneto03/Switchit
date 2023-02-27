@@ -20,5 +20,3 @@ To discourage the waste of resources, by promoting circular economy and creating
 - Calendar or scheduling app on the users' phone
 - Location services (maybe Google Maps)
 - Allow access to the camera and gallery
--
-
