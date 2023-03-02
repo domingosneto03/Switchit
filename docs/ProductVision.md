@@ -15,7 +15,7 @@ To discourage the waste of resources, by promoting circular economy and creating
  - Feature 7 - Allow users to mark items as favorite
 
 ### Assumptions and dependencies
-- Internet
+- Internet Connectivity
 - Database for users and their items
 - Calendar or reminder app on the users' phone
 - Location services (maybe Google Maps)
