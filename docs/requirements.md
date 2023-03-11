@@ -35,5 +35,5 @@ Our application's domain is focused around the user and his items up for trading
 
 Example:
  <p align="center" justify="center">
-  <img src="![domain_model drawio](https://user-images.githubusercontent.com/64654433/224508778-6dba2aeb-d0c3-4d09-9bdb-e228f37fda2f.png)"/>
+  <img src="https://user-images.githubusercontent.com/64654433/224508778-6dba2aeb-d0c3-4d09-9bdb-e228f37fda2f.png"/>
 </p>
