@@ -21,7 +21,7 @@ Example of _UML package diagram_ showing a _logical view_ of the Eletronic Ticke
 
 Our app's GUI communicates directly with its business logic services in order to create a smooth user experience, where requests by the user are directly attended to. To ensure fast, reliable and effective communication between users, the business logic services are directly connected to the Firebase servers where the important information is stored.
 
-![Diagrama sem nome drawio](https://user-images.githubusercontent.com/94202158/224555410-a974f004-9893-48b7-bc63-f41f860a5590.png)
+![Diagrama sem nome drawio (1)](https://user-images.githubusercontent.com/94202158/224555766-78d620b8-3665-45d2-beac-89cf0f74caf5.png)
 
 ### Physical architecture
 The goal of this subsection is to document the high-level physical structure of the software system (machines, connections, software components installed, and their dependencies) using UML deployment diagrams (Deployment View) or component diagrams (Implementation View), separate or integrated, showing the physical structure of the system.
