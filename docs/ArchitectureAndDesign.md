@@ -1,4 +1,3 @@
-
 ## Architecture and Design
 The architecture of a software system encompasses the set of key decisions about its overall organization. 
 
@@ -31,7 +30,7 @@ It should describe also the technologies considered and justify the selections m
 Example of _UML deployment diagram_ showing a _deployment view_ of the Eletronic Ticketing System (please notice that, instead of software components, one should represent their physical/executable manifestations for deployment, called artifacts in UML; the diagram should be accompanied by a short description of each node and artifact):
 
 ![physical architeture drawio](https://user-images.githubusercontent.com/94236502/224554438-0e223175-47d1-4667-842b-b7055fafb143.png)
-
+![Component_diagram](https://user-images.githubusercontent.com/93836583/224556826-75580d1c-1feb-417f-a0d7-4a67227420ee.png)
 
 ### Vertical prototype
 To help on validating all the architectural, design and technological decisions made, we usually implement a vertical prototype, a thin vertical slice of the system.
