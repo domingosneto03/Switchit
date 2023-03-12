@@ -1,4 +1,4 @@
-Switchit Development Report
+## Switchit Development Report
 
 Welcome to the documentation pages of the Switchit App!
 
@@ -26,10 +26,11 @@ Please contact us!
 
 Thank you!
 
-* Artur Telo Luís\
-* Domingos Manuel Ordenâ Neto\
-* Francisco Gonçalves de Sousa\
-* João Alberto Correia Ribeiro\
+### Contributors
+* Artur Telo Luís
+* Domingos Manuel Ordenâ Neto
+* Francisco Gonçalves de Sousa
+* João Alberto Correia Ribeiro
 * Xavier Maria Pimenta Santos
 
 ---
