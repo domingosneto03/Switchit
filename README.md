@@ -26,10 +26,10 @@ Please contact us!
 
 Thank you!
 
-Artur Telo Luís\
-Domingos Manuel Ordenâ Neto\
-Francisco Gonçalves de Sousa\
-João Alberto Correia Ribeiro\
-Xavier Maria Pimenta Santos
+*Artur Telo Luís\
+*Domingos Manuel Ordenâ Neto\
+*Francisco Gonçalves de Sousa\
+*João Alberto Correia Ribeiro\
+*Xavier Maria Pimenta Santos
 
 ---
