@@ -12,7 +12,7 @@ The purpose of this subsection is to document the high-level logical structure o
 
 Our app is devided in 3 main packages, Presentation package, Business package and Backend package. The Presentation package has everything that is related to the interface of our app (screens, buttons, ...). The Business package is divided in 3 sub-packages, Transactions, Items and Users. Transactions package representing a transaction between two users on the app, User package representing a user of the app and Item package representing an item that can be traded on the app. The Backend package contains all the backend components of the app, such as the database, API, and server.
 
-![package diagram drawio](https://user-images.githubusercontent.com/113949811/224556646-f213ed2d-0be9-409d-893b-ca4735bb480a.png)
+![package diagram drawio](https://user-images.githubusercontent.com/113949811/224558814-29da752b-2d7c-4936-955c-bec0d54fefa0.png)
 
 Our app's GUI communicates directly with its business logic services in order to create a smooth user experience, where requests by the user are directly attended to. To ensure fast, reliable and effective communication between users, the business logic services are directly connected to the Firebase servers where the important information is stored.
 
