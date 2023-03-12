@@ -10,11 +10,7 @@ In this section you should start by briefly describing the overall components of
 ### Logical architecture
 The purpose of this subsection is to document the high-level logical structure of the code (Logical View), using a UML diagram with logical packages, without the worry of allocating to components, processes or machines.
 
-It can be beneficial to present the system both in a horizontal or vertical decomposition:
-* horizontal decomposition may define layers and implementation concepts, such as the user interface, business logic and concepts; 
-* vertical decomposition can define a hierarchy of subsystems that cover all layers of implementation.
-
-Example of _UML package diagram_ showing a _logical view_ of the Eletronic Ticketing System (to be accompanied by a short description of each package):
+Our app is devided in 3 main packages, Presentation package, Business package and Backend package. The Presentation package has every thing that is related to the interface of our app (screens, buttons, ...). The Business package is divided in 3 sub-packages, Transactions, Items and Users. Transactions package representing a transaction between two users on the app, User package representing a user of the app and Item package representing an item that can be traded on the app. The Backend package contains all the backend components of the app, such as the database, API, and server.
 
 ![package diagram drawio](https://user-images.githubusercontent.com/113949811/224556646-f213ed2d-0be9-409d-893b-ca4735bb480a.png)
 
