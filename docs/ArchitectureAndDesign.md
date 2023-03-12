@@ -17,7 +17,7 @@ It can be beneficial to present the system both in a horizontal or vertical deco
 
 Example of _UML package diagram_ showing a _logical view_ of the Eletronic Ticketing System (to be accompanied by a short description of each package):
 
-![LogicalView](https://user-images.githubusercontent.com/9655877/160585416-b1278ad7-18d7-463c-b8c6-afa4f7ac7639.png)
+![package diagram drawio](https://user-images.githubusercontent.com/113949811/224556646-f213ed2d-0be9-409d-893b-ca4735bb480a.png)
 
 Our app's GUI communicates directly with its business logic services in order to create a smooth user experience, where requests by the user are directly attended to. To ensure fast, reliable and effective communication between users, the business logic services are directly connected to the Firebase servers where the important information is stored.
 
@@ -39,4 +39,3 @@ To help on validating all the architectural, design and technological decisions 
 In this subsection please describe which feature you have implemented, and how, together with a snapshot of the user interface, if applicable.
 
 At this phase, instead of a complete user story, you can simply implement a feature that demonstrates thay you can use the technology, for example, show a screen with the app credits (name and authors).
-
