@@ -26,7 +26,10 @@ Please contact us!
 
 Thank you!
 
-*team members names*
+Artur Telo Luís\
+Domingos Manuel Ordenâ Neto\
+Francisco Gonçalves de Sousa\
+João Alberto Correia Ribeiro\
+Xavier Maria Pimenta Santos
 
 ---
-
