@@ -3,10 +3,6 @@ The architecture of a software system encompasses the set of key decisions about
 
 A well written architecture document is brief but reduces the amount of time it takes new programmers to a project to understand the code to feel able to make modifications and enhancements.
 
-To document the architecture requires describing the decomposition of the system in their parts (high-level components) and the key behaviors and collaborations between them. 
-
-In this section you should start by briefly describing the overall components of the project and their interrelations. You should also describe how you solved typical problems you may have encountered, pointing to well-known architectural and design patterns, if applicable.
-
 ### Logical architecture
 The purpose of this subsection is to document the high-level logical structure of the code (Logical View), using a UML diagram with logical packages, without the worry of allocating to components, processes or machines.
 
@@ -19,11 +15,12 @@ Our app's GUI communicates directly with its business logic services in order to
 ![Diagrama sem nome drawio (2)](https://user-images.githubusercontent.com/94202158/224556121-9975036e-abe1-4898-b9d4-76dfe5dc4cd2.png)
 
 ### Physical architecture
-The goal of this subsection is to document the high-level physical structure of the software system (machines, connections, software components installed, and their dependencies) using UML deployment diagrams (Deployment View) or component diagrams (Implementation View), separate or integrated, showing the physical structure of the system.
 
-It should describe also the technologies considered and justify the selections made. Examples of technologies relevant for uni4all are, for example, frameworks for mobile applications (such as Flutter).
+The high-level physical structure of the system is depicted in a deployment diagram, which illustrates the relationship between the hardware and software components of the system. The deployment diagram shows that the Switchit application runs on a user's mobile device and communicates with the backend servers through the internet.
 
-Example of _UML deployment diagram_ showing a _deployment view_ of the Eletronic Ticketing System (please notice that, instead of software components, one should represent their physical/executable manifestations for deployment, called artifacts in UML; the diagram should be accompanied by a short description of each node and artifact):
+The user's mobile device runs on the Android or iOS platform, and the application is developed using the Flutter framework. Flutter was selected as the framework of choice because it enables the development of highly performant and visually appealing applications across multiple platforms. Flutter provides a rich set of widgets and tools, which makes it easier to build responsive and beautiful user interfaces.
+
+Finally, the database management system used by Switchit is Firebase. Firebase is a cloud-based database service that provides real-time data synchronization and offline data access for mobile and web applications. Firebase's cloud-based architecture ensures that data is always accessible and synchronized across all devices, while its real-time data synchronization ensures that users always have the latest information on item availability and trade offers.
 
 ![physical architeture drawio](https://user-images.githubusercontent.com/94236502/224554438-0e223175-47d1-4667-842b-b7055fafb143.png)
 ![Component_diagram](https://user-images.githubusercontent.com/93836583/224556826-75580d1c-1feb-417f-a0d7-4a67227420ee.png)
