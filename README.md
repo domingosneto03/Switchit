@@ -9,12 +9,12 @@ You can find here details about the app, from a high-level vision to low-level i
   * [Elevator Pitch](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T3/blob/main/docs/ElevatorPitch.md)
 * [Requirements](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T3/blob/main/docs/requirements.md)
   * [Use Case Model](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T3/blob/main/docs/requirements.md#Use-case-model)
-  * [User stories](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T3/blob/main/docs/requirements.md#User-stories)
+  * [User stories](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T3/issues)
   * [Domain model](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T3/blob/main/docs/requirements.md#Domain-model)
 * [Architecture and Design](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T3/blob/main/docs/ArchitectureAndDesign.md)
-  * [Logical architecture]
-  * [Physical architecture]
-  * [Vertical prototype]
+  * [Logical architecture](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T3/blob/main/docs/ArchitectureAndDesign.md#logical-architecture)
+  * [Physical architecture](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T3/blob/main/docs/ArchitectureAndDesign.md#physical-architecture)
+  * [Vertical prototype](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T3/blob/main/docs/ArchitectureAndDesign.md#vertical-prototype)
 * [Implementation]
 * [Test]
 * [Configuration and change management]
