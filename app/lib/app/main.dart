@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:learningdart/app/routes.dart';
-import 'package:learningdart/ui/home/home_screen.dart';
+import '/app/routes.dart';
+import '/ui/login/login_screen.dart';
 
 void main() {
   runApp(const SwitchitApp());
@@ -18,7 +18,7 @@ class SwitchitApp extends StatelessWidget {
         primarySwatch: Colors.purple,
       ),
       routes: routes,
-      home: const HomeScreen(),
+      home: const LoginScreen(),
     );
   }
 }
