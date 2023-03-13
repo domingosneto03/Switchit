@@ -1,5 +1,8 @@
 ## Switchit Development Report
 
+[![Flutter][flutter-image]][flutter-url]
+[![Dart][dart-image]][dart-url]
+
 Welcome to the documentation pages of the Switchit App!
 
 You can find here details about the app, from a high-level vision to low-level implementation decisions, a kind of Software Development Report, organized by discipline (as of Rational Unified Process): 
@@ -37,3 +40,8 @@ Thank you!
 
 ---
 [Back to top](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T3#readme)
+
+[flutter-image]: https://img.shields.io/badge/flutter-3.7.6-blue.svg
+[flutter-url]: https://flutter.dev
+[dart-image]: https://img.shields.io/badge/dart-2.19.3-40c4ff.svg
+[dart-url]: https://dart.dev
