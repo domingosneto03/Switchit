@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:learningdart/ui/credits/components/body.dart';
+import '/ui/credits/components/body.dart';
 
 class CreditsScreen extends StatelessWidget {
   const CreditsScreen({super.key});

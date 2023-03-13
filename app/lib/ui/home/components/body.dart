@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:learningdart/ui/credits/credits_screen.dart';
+import '/ui/credits/credits_screen.dart';
 
 class Body extends StatelessWidget {
   const Body({super.key});
