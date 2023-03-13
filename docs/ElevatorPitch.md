@@ -1,7 +1,3 @@
 ## Elevator Pitch
-Draft a small text to help you quickly introduce and describe your product in a short time and a few words (~800 characters), a technique usually known as elevator pitch.
 
-Take a look at the following links to learn some techniques:
-* [Crafting an Elevator Pitch](https://www.mindtools.com/pages/article/elevator-pitch.htm)
-* [The Best Elevator Pitch Examples, Templates, and Tactics - A Guide to Writing an Unforgettable Elevator Speech, by strategypeak.com](https://strategypeak.com/elevator-pitch-examples/)
-* [Top 7 Killer Elevator Pitch Examples, by toggl.com](https://blog.toggl.com/elevator-pitch-examples/)
+Introducing Switchit, the revolutionary trading app that allows you to trade items without spending money. Whether you're looking to trade your old books for some new clothes or your unused kitchen gadgets for some cool electronics, our app makes it easy and simple. Simply upload a photo of your item, and browse through the listings to find what you want. You can also connect with like-minded people in our community and discover new items you never thought you needed. Plus, our platform allows you to create or attend events in your area. Our app is user-friendly, secure, and completely free to use. So why wait? Join the Switchit community today and start trading!
