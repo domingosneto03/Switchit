@@ -1,4 +1,3 @@
-
 ## Product Vision
 
 ### Vision Statement
