@@ -20,13 +20,15 @@ You can find here details about the app, from a high-level vision to low-level i
 * [Configuration and change management]
 * [Project management](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T3/blob/main/docs/ProjectManagement.md)
 
+### Contributing
+
 So far, contributions are exclusively made by the initial team, but we hope to open them to the community, in all areas and topics: requirements, technologies, development, experimentation, testing, etc.
 
-Please contact us! 
+Please contact us!
 
 Thank you!
 
-### Contributors
+### Credits
 * Artur Telo Luís
 * Domingos Manuel Ordenâ Neto
 * Francisco Gonçalves de Sousa
