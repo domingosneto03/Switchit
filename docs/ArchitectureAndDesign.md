@@ -26,8 +26,3 @@ Finally, the database management system used by Switchit is Firebase. Firebase i
 ![Component_diagram](https://user-images.githubusercontent.com/93836583/224556826-75580d1c-1feb-417f-a0d7-4a67227420ee.png)
 
 ### Vertical prototype
-To help on validating all the architectural, design and technological decisions made, we usually implement a vertical prototype, a thin vertical slice of the system.
-
-In this subsection please describe which feature you have implemented, and how, together with a snapshot of the user interface, if applicable.
-
-At this phase, instead of a complete user story, you can simply implement a feature that demonstrates thay you can use the technology, for example, show a screen with the app credits (name and authors).
