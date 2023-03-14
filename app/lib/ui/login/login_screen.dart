@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '/ui/login/components/body.dart';
+import 'package:switchit/ui/login/components/body.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -8,10 +8,6 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: const Text('Login'),
-        ),
-        body: const Body());
+    return Scaffold(backgroundColor: Colors.deepPurple[600], body: Body());
   }
 }
