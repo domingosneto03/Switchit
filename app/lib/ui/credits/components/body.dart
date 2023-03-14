@@ -13,7 +13,7 @@ class Body extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: const [
-                SizedBox(height: 5),
+                SizedBox(height: 10),
                 Text(
                   "About",
                   textAlign: TextAlign.center,
@@ -26,11 +26,22 @@ class Body extends StatelessWidget {
                 ),
                 SizedBox(height: 15),
                 Text(
+                  "Contributing",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 25),
+                ),
+                SizedBox(height: 10),
+                Text(
+                  "So far, contributions are exclusively made by the initial team, but we hope to open them to the community, in all areas and topics: requirements, technologies, development, experimentation, testing, etc.",
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(height: 15),
+                Text(
                   "Team members",
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 25),
                 ),
-                SizedBox(height: 15),
+                SizedBox(height: 10),
                 Text(
                   "Artur Telo Luís"
                   "\nDomingos Manuel Ordenâ Neto"
