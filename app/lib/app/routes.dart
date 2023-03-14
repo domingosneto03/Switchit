@@ -1,5 +1,3 @@
-import 'dart:js';
-
 import 'package:flutter/material.dart';
 import 'package:switchit/ui/messages/message_screen.dart';
 import 'package:switchit/ui/messages/messages_screen.dart';
