@@ -12,6 +12,6 @@ class CreditsScreen extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Credits'),
         ),
-        body: const Body());
+        body: Body());
   }
 }

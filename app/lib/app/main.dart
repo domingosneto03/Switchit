@@ -15,7 +15,7 @@ class SwitchitApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Switchit',
       theme: ThemeData(
-        primarySwatch: Colors.purple,
+        primarySwatch: Colors.deepPurple,
       ),
       routes: routes,
       home: const LoginScreen(),
