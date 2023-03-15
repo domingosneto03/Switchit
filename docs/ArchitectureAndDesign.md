@@ -26,3 +26,15 @@ Finally, the database management system used by Switchit is Firebase. Firebase i
 ![Component_diagram](https://user-images.githubusercontent.com/93836583/224556826-75580d1c-1feb-417f-a0d7-4a67227420ee.png)
 
 ### Vertical prototype
+To begin, it was implemented the login screen which is the first point of entry for a user into a system. In order to create this feature, it was designed a user interface that prompts the user for their login credentials, such as an email and password.
+
+Moving on to the home screen, this feature servers as a landing page for the user after they have successfully logged in. In this early stage it was simply created a route to the home screen by clicking the "Sign in" button without worrying about the user's credentials.
+
+It was also implemented a messages screen where the users can chat with each other. In the home screen the users have also a route for this screen.
+
+Finally, it was implemented a screen with the app credits where it has a brief introduction and the whole team members.
+
+![vertical prototype1] ()
+![vertical prototype2] ()
+![vertical prototype3] ()
+![vertical prototype4] ()
