@@ -23,22 +23,45 @@ class Body extends StatelessWidget {
     return SafeArea(
       child: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
-              'Login Account',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 26,
-                fontWeight: FontWeight.bold,
-              ),
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(25, 115, 0, 0),
+                  child: Row(
+                    children: [
+                      const Text(
+                        'Login Account',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 28,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const Padding(padding: EdgeInsets.only(left: 3.5)),
+                      Image.asset(
+                        'assets/images/user.png',
+                        width: 25,
+                        height: 25,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
-            const Text(
-              'Welcome back you\'ve been missed!',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 16,
-              ),
+            Row(
+              children: const [
+                Padding(
+                  padding: EdgeInsets.fromLTRB(25, 5, 0, 15),
+                  child: Text(
+                    'Sign in to continue!',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                    ),
+                  ),
+                ),
+              ],
             ),
             const SizedBox(height: 25),
             MyTextField(
@@ -53,14 +76,31 @@ class Body extends StatelessWidget {
               obscureText: true,
             ),
             Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 25.0, vertical: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: const [
                   Text(
                     'Forgot Password?',
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 13,
+                        decoration: TextDecoration.underline),
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(25, 4, 0, 0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: const [
+                  Text(
+                    'Remember Me',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 17,
+                        fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
@@ -73,7 +113,7 @@ class Body extends StatelessWidget {
             ),
             const SizedBox(height: 50),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 25.0),
+              padding: const EdgeInsets.symmetric(horizontal: 25),
               child: Row(
                 children: [
                   const Expanded(
@@ -102,7 +142,6 @@ class Body extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: const [
-                // google button
                 SquareTile(imagePath: 'assets/images/google.png'),
                 SizedBox(width: 25),
               ],
