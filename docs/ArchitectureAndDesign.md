@@ -34,7 +34,7 @@ It was also implemented a messages screen where the users can chat with each oth
 
 Finally, it was implemented a screen with the app credits where it has a brief introduction and the whole team members.
 
-![vertical prototype1] ()
-![vertical prototype2] ()
-![vertical prototype3] ()
-![vertical prototype4] ()
+![login_snapshotdraft](https://user-images.githubusercontent.com/93836583/225309440-b4cc9321-5888-43f8-a8de-4daa4b79058d.png)
+![home_snapshotdraft](https://user-images.githubusercontent.com/93836583/225309450-c8b8bd59-79b6-4656-9a8d-207b9a2889d2.png)
+![messages_snapshotdraft](https://user-images.githubusercontent.com/93836583/225309429-c7c5b64b-ae9c-4ba4-b190-f0c55d8b8df9.png)
+![credits_snapshotdraft](https://user-images.githubusercontent.com/93836583/225309452-0ec77fe8-1090-4120-b7e5-d4a1ad194a90.png)
