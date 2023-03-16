@@ -12,7 +12,7 @@ Our app is devided in 3 main packages, Presentation package, Business package an
 
 Our app's GUI communicates directly with its business logic services in order to create a smooth user experience, where requests by the user are directly attended to. To ensure fast, reliable and effective communication between users, the business logic services are directly connected to the Firebase servers where the important information is stored.
 
-![Diagrama sem nome drawio (2)](https://user-images.githubusercontent.com/94202158/224556121-9975036e-abe1-4898-b9d4-76dfe5dc4cd2.png)
+![Diagrama sem nome drawio (3)](https://user-images.githubusercontent.com/94202158/225685751-f3c7b092-8e83-4e5e-ad05-6cfa35852293.png)
 
 ### Physical architecture
 
