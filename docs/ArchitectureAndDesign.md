@@ -6,13 +6,13 @@ A well written architecture document is brief but reduces the amount of time it 
 ### Logical architecture
 The purpose of this subsection is to document the high-level logical structure of the code (Logical View), using a UML diagram with logical packages, without the worry of allocating to components, processes or machines.
 
-Our app is devided in 3 main packages, Presentation package, Business package and Backend package. The Presentation package has everything that is related to the interface of our app (screens, buttons, ...). The Business package is divided in 3 sub-packages, Transactions, Items and Users. Transactions package representing a transaction between two users on the app, User package representing a user of the app and Item package representing an item that can be traded on the app. The Backend package contains all the backend components of the app, such as the database, API, and server.
+Our app is devided in 3 main packages, Presentation package, Business package and Backend package. The Presentation package has everything that is related to the interface of our app (screens, buttons, ...). The Business package is divided in 3 sub-packages, Transactions, Items and Users. Transactions package representing a transaction between two users on the app, User package representing a user of the app and Item package representing an item that can be traded on the app.
 
-![package diagram drawio](https://user-images.githubusercontent.com/113949811/224558814-29da752b-2d7c-4936-955c-bec0d54fefa0.png)
+![package_diagram drawio](https://user-images.githubusercontent.com/113949811/225690095-e4a440a8-f9f3-4406-9b00-185de4d7504f.png)
 
 Our app's GUI communicates directly with its business logic services in order to create a smooth user experience, where requests by the user are directly attended to. To ensure fast, reliable and effective communication between users, the business logic services are directly connected to the Firebase servers where the important information is stored.
 
-![Diagrama sem nome drawio (2)](https://user-images.githubusercontent.com/94202158/224556121-9975036e-abe1-4898-b9d4-76dfe5dc4cd2.png)
+![Diagrama sem nome drawio (3)](https://user-images.githubusercontent.com/94202158/225685751-f3c7b092-8e83-4e5e-ad05-6cfa35852293.png)
 
 ### Physical architecture
 
