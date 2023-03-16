@@ -168,6 +168,72 @@ class Body extends StatelessWidget {
               ),
             ],
           ),
+          Row(
+            textDirection: TextDirection.ltr,
+            children: [
+              Container(
+                margin: const EdgeInsets.only(top: 2),
+                constraints: const BoxConstraints(maxWidth: 400),
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  color: Colors.blueGrey,
+                ),
+                child: const Text(
+                  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaahhhhhhhhhhhhhhhhhhhhhhhhgggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg",
+                  style: TextStyle(color: Colors.white, fontSize: 14),
+                ),
+              ),
+              Container(
+                decoration: const BoxDecoration(color: Colors.white),
+                constraints: const BoxConstraints(minWidth: 50),
+              ),
+            ],
+          ),
+          Row(
+            textDirection: TextDirection.ltr,
+            children: [
+              Container(
+                margin: const EdgeInsets.only(top: 2),
+                constraints: const BoxConstraints(maxWidth: 400),
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  color: Colors.blueGrey,
+                ),
+                child: const Text(
+                  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaahhhhhhhhhhhhhhhhhhhhhhhhgggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg",
+                  style: TextStyle(color: Colors.white, fontSize: 14),
+                ),
+              ),
+              Container(
+                decoration: const BoxDecoration(color: Colors.white),
+                constraints: const BoxConstraints(minWidth: 50),
+              ),
+            ],
+          ),
+          Row(
+            textDirection: TextDirection.ltr,
+            children: [
+              Container(
+                margin: const EdgeInsets.only(top: 2),
+                constraints: const BoxConstraints(maxWidth: 400),
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  color: Colors.blueGrey,
+                ),
+                child: const Text(
+                  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaahhhhhhhhhhhhhhhhhhhhhhhhgggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg",
+                  style: TextStyle(color: Colors.white, fontSize: 14),
+                ),
+              ),
+              Container(
+                decoration: const BoxDecoration(color: Colors.white),
+                constraints: const BoxConstraints(minWidth: 50),
+              ),
+            ],
+          ),
         ],
       ),
     );
