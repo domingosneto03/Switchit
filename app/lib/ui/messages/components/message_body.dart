@@ -3,6 +3,40 @@ import 'package:flutter/material.dart';
 class Body extends StatelessWidget {
   const Body({super.key});
 
+  Row buildMessage(String text, bool sender) {
+    TextDirection t;
+    Color c;
+    if (sender) {
+      t = TextDirection.rtl;
+      c = Colors.indigo;
+    } else {
+      t = TextDirection.ltr;
+      c = Colors.blueGrey;
+    }
+    return Row(
+      textDirection: t,
+      children: [
+        Container(
+          margin: const EdgeInsets.only(top: 2),
+          constraints: const BoxConstraints(maxWidth: 400),
+          padding: const EdgeInsets.all(10),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(5),
+            color: c,
+          ),
+          child: Text(
+            text,
+            style: const TextStyle(color: Colors.white, fontSize: 14),
+          ),
+        ),
+        Container(
+          decoration: const BoxDecoration(color: Colors.white),
+          constraints: const BoxConstraints(minWidth: 50),
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -10,7 +44,7 @@ class Body extends StatelessWidget {
       child: ListView(
         scrollDirection: Axis.vertical,
         children: [
-          Row(
+          /*Row(
             textDirection: TextDirection.ltr,
             children: [
               Expanded(
@@ -33,20 +67,21 @@ class Body extends StatelessWidget {
                 constraints: const BoxConstraints(minWidth: 50),
               ),
             ],
-          ),
-          Row(
+          ),*/
+          buildMessage("vamus magna lacus, lobortis vitae erat ut, tincidunt elementum orci. Etiam metus ligula, feugiat ac ex pellentesque, porta sodales risus. Mauris sit amet eros eu velit condimentum sodales. Donec tincidunt molestie pulvinar. Donec accumsan ut mauris at lacinia. Suspendisse potenti. ", false),
+          /*Row(
             textDirection: TextDirection.ltr,
             children: [
                 Container(
                   margin: const EdgeInsets.only(top: 2),
-                  constraints: const BoxConstraints(maxWidth: 400),
+                  constraints: BoxConstraints(maxWidth: 400),
                   padding: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5),
                     color: Colors.blueGrey,
                   ),
-                  child: const Text(
-                    ". ",
+                  child: Text(
+                    ".",
                     style: TextStyle(color: Colors.white, fontSize: 14),
                   ),
                 ),
@@ -55,8 +90,9 @@ class Body extends StatelessWidget {
                 constraints: const BoxConstraints(minWidth: 50),
               ),
             ],
-          ),
-          Row(
+          ),*/
+          buildMessage(".", false),
+          /*Row(
             textDirection: TextDirection.ltr,
             children: [
               Container(
@@ -77,8 +113,9 @@ class Body extends StatelessWidget {
                 constraints: const BoxConstraints(minWidth: 50),
               ),
             ],
-          ),
-          Row(
+          ),*/
+          buildMessage("funciona com vários tamanhos", false),
+          /*Row(
             textDirection: TextDirection.rtl,
             children: [
               Container(
@@ -99,8 +136,9 @@ class Body extends StatelessWidget {
                 constraints: const BoxConstraints(minWidth: 50),
               ),
             ],
-          ),
-          Row(
+          ),*/
+          buildMessage("isso foi o que ela disse lol", true),
+          /*Row(
             textDirection: TextDirection.ltr,
             children: [
               Container(
@@ -121,8 +159,9 @@ class Body extends StatelessWidget {
                 constraints: const BoxConstraints(minWidth: 50),
               ),
             ],
-          ),
-          Row(
+          ),*/
+          buildMessage("isso foi o que ela disse lol", false),
+          /*Row(
             textDirection: TextDirection.ltr,
             children: [
               Container(
@@ -143,8 +182,9 @@ class Body extends StatelessWidget {
                 constraints: const BoxConstraints(minWidth: 50),
               ),
             ],
-          ),
-          Row(
+          ),*/
+          buildMessage("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaahhhhhhhhhhhhhhhhhhhhhhhhgggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg", false),
+          /*Row(
             textDirection: TextDirection.rtl,
             children: [
               Container(
@@ -167,8 +207,19 @@ class Body extends StatelessWidget {
                 constraints: const BoxConstraints(minWidth: 50),
               ),
             ],
-          ),
-          Row(
+          ),*/
+          buildMessage("skidipopst \n"
+              "bip di boop \n"
+              "akgjhakbghwgkjhgjhqwgriiyasfmnnbn", true),
+          buildMessage("skidipopst \n"
+              "bip di boop \n"
+              "akgjhakbghwgkjhgjhqwgriiyasfmnnbn", false),
+          buildMessage("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaahhhhhhhhhhhhhhhhhhhhhhhhgggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg", false),
+          buildMessage("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaahhhhhhhhhhhhhhhhhhhhhhhhgggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg", true),
+          buildMessage("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaahhhhhhhhhhhhhhhhhhhhhhhhgggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg", false),
+          buildMessage("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaahhhhhhhhhhhhhhhhhhhhhhhhgggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg", true),
+
+          /*Row(
             textDirection: TextDirection.ltr,
             children: [
               Container(
@@ -233,7 +284,7 @@ class Body extends StatelessWidget {
                 constraints: const BoxConstraints(minWidth: 50),
               ),
             ],
-          ),
+          ),*/
         ],
       ),
     );
