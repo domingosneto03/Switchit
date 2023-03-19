@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "687310192425",
+    "project_id": "switchit-f3d74",
+    "storage_bucket": "switchit-f3d74.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:687310192425:android:ac6fed0ab6c4a25cd4c138",
+        "android_client_info": {
+          "package_name": "pt.up.switchit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "687310192425-iorod6ici1bms61ba4d3uemu99ij5ers.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVr0r7ZjizrI0_eXE9KcTiRM8bxJkI3UM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "687310192425-iorod6ici1bms61ba4d3uemu99ij5ers.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "687310192425-276b8r77u87aqo0krbakgq7os0ej73tg.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "pt.up.switchit"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
