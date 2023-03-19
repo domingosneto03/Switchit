@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 
-class MyTextField extends StatelessWidget {
+class TextFieldDefault extends StatelessWidget {
   final controller;
+  final onChanged;
+  final keyboardType;
   final String hintText;
   final bool obscureText;
 
-  const MyTextField({
+  const TextFieldDefault({
     super.key,
     required this.controller,
+    required this.onChanged,
+    required this.keyboardType,
     required this.hintText,
     required this.obscureText,
   });
@@ -19,6 +23,8 @@ class MyTextField extends StatelessWidget {
       child: TextField(
         controller: controller,
         obscureText: obscureText,
+        keyboardType: keyboardType,
+        onChanged: onChanged,
         decoration: InputDecoration(
             enabledBorder: const OutlineInputBorder(
               borderSide: BorderSide(color: Colors.white),
