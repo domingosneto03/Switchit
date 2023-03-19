@@ -1,21 +1,36 @@
 import 'package:flutter/material.dart';
-import 'package:switchit/ui/login/components/square_tile.dart';
+import 'package:switchit/network/network_controller.dart';
+import 'package:switchit/ui/signup/signup_screen.dart';
+import '../../components/textfield_default.dart';
+import '../../components/square_tile.dart';
 import '/ui/home/home_screen.dart';
-import 'button.dart';
-import 'my_textfield.dart';
+import '../../components/button_default.dart';
 
 class Body extends StatelessWidget {
   Body({super.key});
 
-  final usernameController = TextEditingController();
+  String? email;
+  String? password;
+
+  final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
-  signUserIn(BuildContext context) {
-    Navigator.pushAndRemoveUntil(
-      context,
-      MaterialPageRoute(builder: (context) => const HomeScreen()),
-      (Route<dynamic> route) => false,
-    );
+  signUserIn(BuildContext context) async {
+    var result = await NetworkController.login(email ?? "", password ?? "");
+
+    if (result == LoginStatus.success) {
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => const HomeScreen()),
+        (Route<dynamic> route) => false,
+      );
+    } else if (result == LoginStatus.wrongPassword) {
+      debugPrint("Show error to the user");
+    } else if (result == LoginStatus.userNotFound) {
+      debugPrint("Show error to the user");
+    } else {
+      debugPrint("Show generic error to the user");
+    }
   }
 
   @override
@@ -64,15 +79,23 @@ class Body extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 25),
-            MyTextField(
-              controller: usernameController,
+            TextFieldDefault(
+              keyboardType: TextInputType.emailAddress,
+              controller: emailController,
               hintText: 'Email',
+              onChanged: (text) {
+                email = text;
+              },
               obscureText: false,
             ),
             const SizedBox(height: 10),
-            MyTextField(
+            TextFieldDefault(
+              keyboardType: TextInputType.visiblePassword,
               controller: passwordController,
               hintText: 'Password',
+              onChanged: (text) {
+                password = text;
+              },
               obscureText: true,
             ),
             Padding(
@@ -106,11 +129,11 @@ class Body extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 25),
-            MyButton(
-              onTap: () {
-                signUserIn(context);
-              },
-            ),
+            ButtonDefault(
+                name: "Sign In",
+                onTap: () {
+                  signUserIn(context);
+                }),
             const SizedBox(height: 50),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -149,19 +172,24 @@ class Body extends StatelessWidget {
             const SizedBox(height: 50),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                Text(
+              children: [
+                const Text(
                   'Not a member?',
                   style: TextStyle(color: Colors.white),
                 ),
-                SizedBox(width: 4),
-                Text(
-                  'Register now',
-                  style: TextStyle(
-                    color: Colors.blue,
-                    fontWeight: FontWeight.bold,
+                const SizedBox(width: 4),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, SignupScreen.routeName);
+                  },
+                  child: const Text(
+                    'Register now',
+                    style: TextStyle(
+                      color: Colors.blue,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
+                )
               ],
             )
           ],
