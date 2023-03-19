@@ -11,6 +11,7 @@ class Body extends StatelessWidget {
 
   String? email;
   String? password;
+  bool isRemembered = false;
 
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -117,13 +118,19 @@ class Body extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(25, 4, 0, 0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
-                children: const [
-                  Text(
+                children: [
+                  const Text(
                     'Remember Me',
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 17,
                         fontWeight: FontWeight.bold),
+                  ),
+                  Switch(
+                    value: isRemembered,
+                    onChanged: (bool value) {
+                      isRemembered = value;
+                    },
                   ),
                 ],
               ),
