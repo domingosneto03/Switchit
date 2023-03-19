@@ -16,9 +16,9 @@ class Body extends StatelessWidget {
                 Navigator.pushNamed(context, MessageScreen.routeName);
               },
               child: Container(
+                alignment: Alignment.topLeft,
                 child: Text("Constâncio", style: TextStyle(color: Colors.white, fontSize: 20),),
                 height: 100,
-                width: 210,
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(
