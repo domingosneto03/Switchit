@@ -2,7 +2,7 @@
 
 ### Vision Statement
 
-To discourage the waste of resources, by promoting circular economy and creating communites for trading and sharing interests.
+To discourage the waste of resources, by promoting circular economy and creating communites for trading and sharing interests. This is what Switchit is for! Discover products of personal interest online and swap with a possessed item, in order to satisfy both parties and promote these aspects mentioned above.
 
 ### Main Features
  - Feature 1 - Allow users to easily post items in their profile that they no longer need and wish to trade
