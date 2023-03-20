@@ -23,7 +23,6 @@ The user's mobile device runs on the Android or iOS platform, and the applicatio
 Finally, the database management system used by Switchit is Firebase. Firebase is a cloud-based database service that provides real-time data synchronization and offline data access for mobile and web applications. Firebase's cloud-based architecture ensures that data is always accessible and synchronized across all devices, while its real-time data synchronization ensures that users always have the latest information on item availability and trade offers.
 
 ![physical architeture drawio](https://user-images.githubusercontent.com/94236502/224554438-0e223175-47d1-4667-842b-b7055fafb143.png)
-![Component_diagram](https://user-images.githubusercontent.com/93836583/224556826-75580d1c-1feb-417f-a0d7-4a67227420ee.png)
 
 ### Vertical prototype
 To begin, it was implemented the login screen which is the first point of entry for a user into a system. In order to create this feature, it was designed a user interface that prompts the user for their login credentials, such as an email and password.
