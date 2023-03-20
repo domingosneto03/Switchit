@@ -2,7 +2,7 @@
 
 ### Vision Statement
 
-To discourage the waste of resources, by promoting circular economy and creating communites for trading and sharing interests. This is what Switchit is for! Discover products of personal interest online and swap with a possessed item, in order to satisfy both parties and promote these aspects mentioned above.
+To discourage the waste of resources, by promoting circular economy and creating communities for trading and sharing interests. This is what Switchit is for! Discover products of personal interest online and swap with a possessed item, in order to satisfy both parties and promote these aspects mentioned above. With our app, we envision a world where trading is not just a means to acquire goods, but also a social and fun activity that connects people from different backgrounds and cultures.
 
 ### Main Features
  - Feature 1 - Allow users to easily post items in their profile that they no longer need and wish to trade
@@ -18,5 +18,6 @@ To discourage the waste of resources, by promoting circular economy and creating
 - Database for users and their items
 - Calendar or reminder app on the users' phone
 - Location services (maybe Google Maps)
-- Allow access to the camera and gallery
+- Allow access to the camera 
+- Allow access to the gallery
 - Allow access to the microphone
