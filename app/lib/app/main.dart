@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:switchit/network/network_controller.dart';
+import 'package:switchit/app/network/network_controller.dart';
 import '../ui/home/home_screen.dart';
 import '/app/routes.dart';
 import '/ui/login/login_screen.dart';
