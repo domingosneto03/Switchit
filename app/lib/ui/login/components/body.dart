@@ -6,14 +6,22 @@ import '../../components/square_tile.dart';
 import '/ui/home/home_screen.dart';
 import '../../components/button_default.dart';
 
-class Body extends StatelessWidget {
-  Body({super.key});
+class Body extends StatefulWidget {
+  const Body({super.key});
 
+  @override
+  State<Body> createState() => _BodyState();
+}
+
+class _BodyState extends State<Body> {
   String? email;
+
   String? password;
+
   bool isRemembered = false;
 
   final emailController = TextEditingController();
+
   final passwordController = TextEditingController();
 
   signUserIn(BuildContext context) async {
@@ -129,7 +137,9 @@ class Body extends StatelessWidget {
                   Switch(
                     value: isRemembered,
                     onChanged: (bool value) {
-                      isRemembered = value;
+                      setState(() {
+                        isRemembered = value;
+                      });
                     },
                   ),
                 ],
