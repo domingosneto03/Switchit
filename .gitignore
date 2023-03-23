@@ -1,3 +1,10 @@
 .DS_Store
 .vscode/
 .idea
+app/.dart_tool
+app/.idea
+app/android
+app/build
+app/ios
+app/linux
+app/windows
