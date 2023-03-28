@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:switchit/ui/messages/messages_screen.dart';
+import 'package:switchit/ui/user_profile/user_profile_screen.dart';
 import '/ui/credits/credits_screen.dart';
 
 class Body extends StatelessWidget {
@@ -46,7 +47,24 @@ class Body extends StatelessWidget {
                                 Navigator.pushNamed(
                                     context, MessagesScreen.routeName);
                               },
-                              child: const Text('Messages')))
+                              child: const Text('Messages'),
+                          ),
+                      ),
+                      Expanded(
+                        child: TextButton(
+                          style: const ButtonStyle(
+                            foregroundColor:
+                            MaterialStatePropertyAll(Colors.white),
+                            backgroundColor:
+                            MaterialStatePropertyAll(Colors.red),
+                          ),
+                          onPressed: () {
+                            Navigator.pushNamed(
+                                context, UserProfileScreen.routeName);
+                          },
+                          child: const Text('Profile'),
+                        ),
+                      ),
                     ],
                   ),
                 ),
