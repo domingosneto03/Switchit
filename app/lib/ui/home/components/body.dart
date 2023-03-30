@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:switchit/ui/followers/followers_screen.dart';
+import 'package:switchit/ui/followers/follow_main_screen.dart';
 import 'package:switchit/ui/messages/messages_screen.dart';
 import '/ui/credits/credits_screen.dart';
 
@@ -60,7 +60,7 @@ class Body extends StatelessWidget {
                               ),
                               onPressed: () {
                                 Navigator.pushNamed(
-                                    context, FollowersScreen.routeName);
+                                    context, FollowMainScreen.routeName);
                               },
                               child: const Text('Followers/Following')))
                     ],

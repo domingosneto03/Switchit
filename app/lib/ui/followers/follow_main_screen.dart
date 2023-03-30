@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
-import '/ui/followers/components/followers_body.dart';
+import 'package:switchit/ui/followers/components/followers_tab.dart';
+import 'package:switchit/ui/followers/components/following_tab.dart';
 
-class FollowersScreen extends StatefulWidget {
-  const FollowersScreen({super.key});
+class FollowMainScreen extends StatefulWidget {
+  const FollowMainScreen({super.key});
 
   static String routeName = "/followers_screen";
 
   @override
-  State<FollowersScreen> createState() => _FollowersScreenState();
+  State<FollowMainScreen> createState() => _FollowMainScreenState();
 }
 
-class _FollowersScreenState extends State<FollowersScreen> {
+class _FollowMainScreenState extends State<FollowMainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,14 +29,8 @@ class _FollowersScreenState extends State<FollowersScreen> {
           ),
           body: const TabBarView(
             children: [
-              Text(
-                "Followers",
-                textAlign: TextAlign.center,
-              ),
-              Text(
-                "Following",
-                textAlign: TextAlign.center,
-              )
+              FollowersTab(),
+              FollowingTab(),
             ],
           ),
         ),
