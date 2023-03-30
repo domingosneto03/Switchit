@@ -11,7 +11,7 @@ class Body extends StatelessWidget {
     Color c;
     if (sender) {
       t = TextDirection.rtl;
-      c = Colors.indigo;
+      c = const Color.fromRGBO(124, 90, 181, 1);
     } else {
       t = TextDirection.ltr;
       c = Colors.blueGrey;
