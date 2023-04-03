@@ -44,8 +44,8 @@ class Body extends StatelessWidget {
                 ),
               ],
             ),
-            const Row(
-              children: [
+            Row(
+              children: const [
                 Padding(
                   padding: EdgeInsets.fromLTRB(25, 5, 0, 15),
                   child: Text(

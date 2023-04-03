@@ -73,8 +73,8 @@ class _BodyState extends State<Body> {
                 ),
               ],
             ),
-            const Row(
-              children: [
+            Row(
+              children: const [
                 Padding(
                   padding: EdgeInsets.fromLTRB(25, 5, 0, 15),
                   child: Text(
@@ -107,11 +107,11 @@ class _BodyState extends State<Body> {
               },
               obscureText: true,
             ),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
-                children: [
+                children: const [
                   Text(
                     'Forgot Password?',
                     style: TextStyle(
@@ -179,9 +179,9 @@ class _BodyState extends State<Body> {
               ),
             ),
             const SizedBox(height: 50),
-            const Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+              children: const [
                 SquareTile(imagePath: 'assets/images/google.png'),
                 SizedBox(width: 25),
               ],
