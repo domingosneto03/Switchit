@@ -53,8 +53,8 @@ class _BodyState extends State<Body> {
                   ),
                 ],
               ),
-              Row(
-                children: const [
+              const Row(
+                children: [
                   Padding(
                     padding: EdgeInsets.fromLTRB(25, 5, 0, 15),
                     child: Text(
@@ -142,18 +142,21 @@ class _BodyState extends State<Body> {
         loading?.dismiss();
 
         setState(() {
-          setState(() {
-            showAlertDialog(
-                context: context,
-                title: "Alert",
-                message: "New item was successfully added.",
-                cancelActionText: null,
-                defaultActionText: "Ok",
-                onDefaultActionPressed: () {
+          showAlertDialog(
+              context: context,
+              title: "Alert",
+              message: "New item was successfully added.",
+              cancelActionText: null,
+              defaultActionText: "Ok",
+              onDefaultActionPressed: () async {
+                await viewModel.getItemsCurrentUser();
+
+                setState(() {
                   Navigator.pop(context);
                 });
-          });
+              });
         });
+
         break;
     }
   }
