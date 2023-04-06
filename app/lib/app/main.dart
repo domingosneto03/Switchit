@@ -12,7 +12,7 @@ Future<void> main() async {
 
   await NetworkController.init();
 
-  if (NetworkAuthController.isUserAuthenticated()) {
+  if (await NetworkAuthController.isUserAuthenticated()) {
     debugPrint('User is signed in!');
 
     runApp(MaterialApp(
@@ -36,8 +36,4 @@ Future<void> main() async {
       home: const LoginScreen(),
     ));
   }
-}
-
-Future init(BuildContext context) async {
-  await Future.delayed(const Duration(seconds: 3));
 }
