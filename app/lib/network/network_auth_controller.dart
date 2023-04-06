@@ -18,11 +18,12 @@ class SignUpStatus {
 }
 
 class NetworkAuthController {
-  static bool isUserAuthenticated() {
+  static Future<bool> isUserAuthenticated() async {
     var currentUser = FirebaseAuth.instance.currentUser;
 
     if (currentUser != null) {
       debugPrint("FirebaseAuth (isUserAuthenticated): User is authenticated");
+
       return true;
     } else {
       debugPrint(
@@ -36,6 +37,12 @@ class NetworkAuthController {
       final result = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
       debugPrint('FirebaseAuth (signInWithEmailAndPassword): $result');
+      var success = await NetworkFirestoreController.getUserFromCloud(email);
+
+      if (!success) {
+        return LoginStatus.error;
+      }
+
       return LoginStatus.success;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {

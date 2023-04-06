@@ -1,13 +1,10 @@
 class ItemDataModel {
-  late String name;
-  late String description;
-  late String location;
-  late bool traded;
+  String id = "";
+  String name = "";
+  String description = "";
+  String location = "";
+  bool traded = false;
 
-  ItemDataModel(String name, String description, String location, bool traded) {
-    name = name;
-    description = description;
-    location = location;
-    traded = traded;
-  }
+  ItemDataModel(
+      this.id, this.name, this.description, this.location, this.traded);
 }

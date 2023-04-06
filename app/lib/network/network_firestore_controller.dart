@@ -48,6 +48,36 @@ class NetworkFirestoreController {
     return isAddedToCloud;
   }
 
+  static Future<bool> getUserFromCloud(String email) async {
+    CollectionReference users =
+        FirebaseFirestore.instance.collection(TableCloudUser.name);
+
+    var success = false;
+
+    await users
+        .where(TableCloudUser.fieldUserEmail, isEqualTo: email)
+        .get()
+        .then(
+      (querySnapshot) async {
+        var user = querySnapshot.docs.first;
+        await DatabaseRealm().setUser(
+            user.get(TableCloudUser.fieldUserName),
+            user.get(TableCloudUser.fieldUserSurname),
+            user.get(TableCloudUser.fieldUserEmail),
+            user.id);
+
+        debugPrint("FirebaseFirestore (getUserFromCloud): Success");
+        success = true;
+      },
+      onError: (e) => {
+        debugPrint(
+            "FirebaseFirestore (getUserFromCloud): Failed to get user: $e"),
+        success = false
+      },
+    );
+    return success;
+  }
+
   static Future<bool> removeUserFromCloud(String userId) async {
     CollectionReference users =
         FirebaseFirestore.instance.collection(TableCloudUser.name);
@@ -101,26 +131,48 @@ class NetworkFirestoreController {
 
     List<ItemDataModel> items = [];
 
-    users
-        .doc(userDocId)
-        .collection(TableCloudItem.name)
-        .get()
-        .then((querySnapshot) {
-      for (var doc in querySnapshot.docs) {
-        String name = doc.get(TableCloudItem.fieldItemName);
-        String description = doc.get(TableCloudItem.fieldItemDescription);
-        String location = doc.get(TableCloudItem.fieldItemLocation);
-        bool isTraded = doc.get(TableCloudItem.fieldItemIsTraded);
+    var data = await users.doc(userDocId).collection(TableCloudItem.name).get();
 
-        items.add(ItemDataModel(name, description, location, isTraded));
-      }
+    for (var doc in data.docs) {
+      String id = doc.id;
+      String name = doc.get(TableCloudItem.fieldItemName);
+      String description = doc.get(TableCloudItem.fieldItemDescription);
+      String location = doc.get(TableCloudItem.fieldItemLocation);
+      bool isTraded = doc.get(TableCloudItem.fieldItemIsTraded);
 
-      debugPrint("FirebaseFirestore (getItemsCurrentUserCloud): Success");
-    }).catchError((error) {
       debugPrint(
-          "FirebaseFirestore (getItemsCurrentUserCloud): Failed to get items: $error");
-    });
+          "FirebaseFirestore (getItemsCurrentUserCloud): ItemDataModel-> name: $name, description: $description, location: $location, isTraded: $isTraded");
+
+      items.add(ItemDataModel(id, name, description, location, isTraded));
+    }
+
+    debugPrint("FirebaseFirestore (getItemsCurrentUserCloud): Success");
 
     return items;
+  }
+
+  static Future<bool> removeItemFromCloud(String itemId) async {
+    var userDocId = await DatabaseRealm().getUserDocId();
+
+    CollectionReference users =
+        FirebaseFirestore.instance.collection(TableCloudUser.name);
+
+    var isRemovedFromCloud = false;
+
+    await users
+        .doc(userDocId)
+        .collection(TableCloudItem.name)
+        .doc(itemId)
+        .delete()
+        .then((value) {
+      debugPrint("FirebaseFirestore (removeItemFromCloud): Item Removed");
+      isRemovedFromCloud = true;
+    }).catchError((error) {
+      debugPrint(
+          "FirebaseFirestore (removeItemFromCloud): Failed to remove item: $error");
+      isRemovedFromCloud = false;
+    });
+
+    return isRemovedFromCloud;
   }
 }
