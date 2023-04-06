@@ -1,23 +1,14 @@
-
 import 'package:flutter/material.dart';
-import 'package:switchit/ui/followers/follow_main_screen.dart';
-import 'package:switchit/ui/messages/message_screen.dart';
-import 'package:switchit/ui/messages/messages_screen.dart';
-
-import '../ui/followers/follow_main_screen.dart';
-import 'package:switchit/ui/user_profile/user_profile_screen.dart';
-import '../ui/signup/signup_screen.dart';
-import '/ui/credits/credits_screen.dart';
-import '/ui/home/home_screen.dart';
-import '/ui/login/login_screen.dart';
+import 'package:switchit/screens/forgot_password/view/forgot_password_screen.dart';
+import 'package:switchit/screens/home/home_screen.dart';
+import 'package:switchit/screens/login/view/login_screen.dart';
+import 'package:switchit/screens/home/profile/messages/view/details/message_screen.dart';
+import 'package:switchit/screens/signup/view/signup_screen.dart';
 
 final Map<String, WidgetBuilder> routes = {
   LoginScreen.routeName: (context) => const LoginScreen(),
   SignupScreen.routeName: (context) => const SignupScreen(),
+  ForgotPasswordScreen.routeName: (context) => const ForgotPasswordScreen(),
   HomeScreen.routeName: (context) => const HomeScreen(),
-  CreditsScreen.routeName: (context) => const CreditsScreen(),
-  MessagesScreen.routeName: (context) => const MessagesScreen(),
   MessageScreen.routeName: (context) => const MessageScreen(),
-  FollowMainScreen.routeName: (context) => const FollowMainScreen(),
-  UserProfileScreen.routeName: (context) => const UserProfileScreen(),
 };

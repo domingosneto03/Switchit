@@ -7,5 +7,4 @@ app/android
 app/build
 app/ios
 app/linux
-app/macos
 app/windows
