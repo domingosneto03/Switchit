@@ -29,7 +29,7 @@ class _BodyState extends State<Body> {
         padding: const EdgeInsets.all(20.0),
         child: Column(
           children: [
-            Flex(child: Row(
+            Row(
               children: [
                 Container(
                   decoration: const BoxDecoration(
@@ -68,7 +68,6 @@ class _BodyState extends State<Body> {
                 )
               ],
             ),
-            
             const SizedBox(height: 60),
             Column(
               children: [
