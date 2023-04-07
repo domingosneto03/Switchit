@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:provider/provider.dart';
-import 'package:switchit/app/constants.dart';
 import 'package:switchit/screens/home/profile/items_for_trade/view/list/components/body.dart';
-import 'package:switchit/screens/home/profile/items_for_trade/view/new/item_new_for_trade_screen.dart';
 import 'package:switchit/screens/home/profile/items_for_trade/view_model/items_for_trade_view_model.dart';
 
-class ItemsForTradeScreen extends StatelessWidget {
+class ItemsForTradeScreen extends StatefulWidget {
   const ItemsForTradeScreen({super.key});
 
   static String routeName = "/items_for_trade_screen";
 
+  @override
+  State<ItemsForTradeScreen> createState() => _ItemsForTradeScreenState();
+}
+
+class _ItemsForTradeScreenState extends State<ItemsForTradeScreen> {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -19,21 +21,8 @@ class ItemsForTradeScreen extends StatelessWidget {
           ChangeNotifierProvider(create: (_) => ItemsForTradeViewModel())
         ],
         child: Scaffold(
-            appBar: AppBar(
-              title: const Text('Items for trade'),
-            ),
-            body: ProgressHUD(child: const Body()),
-            floatingActionButton: FloatingActionButton(
-              onPressed: () {
-                PersistentNavBarNavigator.pushNewScreen(
-                  context,
-                  screen: const ItemNewForTradeScreen(),
-                  withNavBar: false,
-                  pageTransitionAnimation: PageTransitionAnimation.cupertino,
-                );
-              },
-              backgroundColor: colorPrimary,
-              child: const Icon(Icons.add),
-            )));
+          appBar: AppBar(title: const Text('Items for trade')),
+          body: ProgressHUD(child: const Body()),
+        ));
   }
 }
