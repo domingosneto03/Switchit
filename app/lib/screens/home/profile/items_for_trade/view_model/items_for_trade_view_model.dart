@@ -11,6 +11,12 @@ class ItemsForTradeViewModel extends ChangeNotifier {
   String newItemDescription = "";
   String newItemLocation = "";
 
+  List<ItemDataModel> items = [];
+
+  ItemsForTradeViewModel() {
+    getItemsCurrentUser();
+  }
+
   Future<void> createItem() async {
     status = StatusView.inProgress;
 
@@ -48,10 +54,16 @@ class ItemsForTradeViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<List<ItemDataModel>> getItemsCurrentUser() async {
-    var items = await NetworkFirestoreController.getItemsCurrentUserCloud();
+  Future<void> getItemsCurrentUser() async {
+    status = StatusView.inProgress;
 
-    return items;
+    notifyListeners();
+
+    items = await NetworkFirestoreController.getItemsCurrentUserCloud();
+
+    status = StatusView.done;
+
+    notifyListeners();
   }
 
   Future<void> deleteItem(String itemId) async {

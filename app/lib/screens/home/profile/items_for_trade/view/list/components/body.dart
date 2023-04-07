@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:provider/provider.dart';
-import 'package:switchit/screens/home/profile/items_for_trade/view_model/item_data_model.dart';
+import 'package:switchit/screens/home/profile/items_for_trade/view/new/item_new_for_trade_screen.dart';
 import 'package:switchit/screens/home/profile/items_for_trade/view_model/items_for_trade_view_model.dart';
 import 'package:switchit/util/status_view.dart';
 import 'package:switchit/util/ui/components/default_dialog.dart';
@@ -14,39 +15,103 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
+  late ItemsForTradeViewModel viewModel;
+
   @override
   Widget build(BuildContext context) {
-    ItemsForTradeViewModel viewModel = context.watch<ItemsForTradeViewModel>();
+    viewModel = context.watch<ItemsForTradeViewModel>();
 
-    return FutureBuilder(
-        future: viewModel.getItemsCurrentUser(),
-        builder: (context, AsyncSnapshot<List<ItemDataModel>> snapshot) {
-          if (!snapshot.hasData) {
-            return const Center(child: CircularProgressIndicator());
-          } else {
-            return ListView.builder(
-              itemCount: snapshot.data!.length,
-              itemBuilder: (context, index) {
-                final item = snapshot.data![index];
-
-                return Dismissible(
-                  key: Key(item.name),
-                  onDismissed: (direction) {
-                    _deleteItem(context, viewModel, item.id);
-
-                    setState(() {
-                      snapshot.data!.removeAt(index);
-                    });
-                  },
-                  background: Container(color: Colors.red),
-                  child: ListTile(
-                    title: Text(item.name),
-                  ),
-                );
+    return Column(children: <Widget>[
+      Expanded(
+          flex: 1,
+          child: RefreshIndicator(
+              onRefresh: () async {
+                await _getItems(context, viewModel);
               },
-            );
-          }
+              child: (() {
+                if (viewModel.status == StatusView.inProgress) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (viewModel.items.isEmpty) {
+                  return const Center(child: Text("You don't have items."));
+                } else {
+                  return ListView.builder(
+                      itemCount: viewModel.items.length,
+                      itemBuilder: (context, index) {
+                        final item = viewModel.items[index];
+
+                        return Dismissible(
+                          key: Key(item.name),
+                          onDismissed: (direction) {
+                            _deleteItem(context, viewModel, item.id);
+
+                            setState(() {
+                              viewModel.items.removeAt(index);
+                            });
+                          },
+                          background: Container(color: Colors.red),
+                          child: ListTile(
+                            title: Text(item.name),
+                          ),
+                        );
+                      });
+                }
+              }()))),
+      Expanded(
+        child: Align(
+          alignment: Alignment.bottomCenter,
+          child: Container(
+            margin: const EdgeInsets.all(40),
+            width: double.infinity,
+            child: ElevatedButton(
+              onPressed: () {
+                PersistentNavBarNavigator.pushNewScreen(
+                  context,
+                  screen: const ItemNewForTradeScreen(),
+                  withNavBar: false,
+                  pageTransitionAnimation: PageTransitionAnimation.cupertino,
+                ).then((value) async {
+                  await viewModel.getItemsCurrentUser();
+                });
+              },
+              child: const Text('New item'),
+            ),
+          ),
+        ),
+      )
+    ]);
+  }
+
+  Future<void> _getItems(
+      BuildContext context, ItemsForTradeViewModel viewModel) async {
+    final loading = ProgressHUD.of(context);
+
+    await viewModel.getItemsCurrentUser();
+
+    switch (viewModel.status) {
+      case StatusView.intial:
+        loading?.dismiss();
+        break;
+      case StatusView.inProgress:
+        loading?.show();
+        break;
+      case StatusView.messageToShow:
+        loading?.dismiss();
+
+        setState(() {
+          showAlertDialog(
+              context: context,
+              title: "Alert",
+              message: viewModel.message,
+              cancelActionText: null,
+              defaultActionText: "Ok",
+              onDefaultActionPressed: () {});
         });
+        break;
+      case StatusView.done:
+        loading?.dismiss();
+
+        break;
+    }
   }
 
   Future<void> _deleteItem(BuildContext context,
