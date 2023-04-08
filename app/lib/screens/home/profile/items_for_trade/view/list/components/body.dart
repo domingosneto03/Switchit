@@ -40,44 +40,61 @@ class _BodyState extends State<Body> {
                         final item = viewModel.items[index];
 
                         return Dismissible(
-                          key: Key(item.name),
-                          onDismissed: (direction) {
-                            _deleteItem(context, viewModel, item.id);
+                            key: Key(item.name),
+                            onDismissed: (direction) {
+                              _deleteItem(context, viewModel, item.id);
 
-                            setState(() {
-                              viewModel.items.removeAt(index);
-                            });
-                          },
-                          background: Container(color: Colors.red),
-                          child: ListTile(
-                            title: Text(item.name),
-                          ),
-                        );
+                              setState(() {
+                                viewModel.items.removeAt(index);
+                              });
+                            },
+                            background: Container(color: Colors.red),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: <Widget>[
+                                ClipRRect(
+                                  borderRadius: const BorderRadius.only(
+                                    topLeft: Radius.circular(8.0),
+                                    topRight: Radius.circular(8.0),
+                                  ),
+                                  child: Image.network(item.imageUrl,
+                                      fit: BoxFit.cover, loadingBuilder:
+                                          (context, child, loadingProgress) {
+                                    if (loadingProgress != null) {
+                                      return const CircularProgressIndicator();
+                                    }
+                                    return child;
+                                  }),
+                                ),
+                                ListTile(
+                                  title: Text(item.name),
+                                  subtitle: Text(item.description),
+                                ),
+                              ],
+                            ));
                       });
                 }
               }()))),
-      Expanded(
-        child: Align(
-          alignment: Alignment.bottomCenter,
-          child: Container(
-            margin: const EdgeInsets.all(40),
-            width: double.infinity,
-            child: ElevatedButton(
-              onPressed: () {
-                PersistentNavBarNavigator.pushNewScreen(
-                  context,
-                  screen: const ItemNewForTradeScreen(),
-                  withNavBar: false,
-                  pageTransitionAnimation: PageTransitionAnimation.cupertino,
-                ).then((value) async {
-                  await viewModel.getItemsCurrentUser();
-                });
-              },
-              child: const Text('New item'),
-            ),
+      Align(
+        alignment: Alignment.bottomCenter,
+        child: Container(
+          margin: const EdgeInsets.all(40),
+          width: double.infinity,
+          child: ElevatedButton(
+            onPressed: () {
+              PersistentNavBarNavigator.pushNewScreen(
+                context,
+                screen: const ItemNewForTradeScreen(),
+                withNavBar: false,
+                pageTransitionAnimation: PageTransitionAnimation.cupertino,
+              ).then((value) async {
+                await viewModel.getItemsCurrentUser();
+              });
+            },
+            child: const Text('New item'),
           ),
         ),
-      )
+      ),
     ]);
   }
 
