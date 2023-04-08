@@ -10,9 +10,9 @@ import 'package:switchit/app/constants.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await NetworkController.init();
+  await NetworkController().init();
 
-  if (await NetworkAuthController.isUserAuthenticated()) {
+  if (await NetworkAuthController().isUserAuthenticated()) {
     debugPrint('User is signed in!');
 
     runApp(MaterialApp(

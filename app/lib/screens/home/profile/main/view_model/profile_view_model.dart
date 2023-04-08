@@ -11,7 +11,7 @@ class ProfileViewModel extends ChangeNotifier {
 
     notifyListeners();
 
-    var result = await NetworkAuthController.logout();
+    var result = await NetworkAuthController().logout();
 
     if (result) {
       status = StatusView.done;
@@ -28,7 +28,7 @@ class ProfileViewModel extends ChangeNotifier {
 
     notifyListeners();
 
-    var result = await NetworkAuthController.deleteAccount();
+    var result = await NetworkAuthController().deleteAccount();
 
     if (result) {
       status = StatusView.done;

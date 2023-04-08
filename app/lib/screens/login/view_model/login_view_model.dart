@@ -29,7 +29,7 @@ class LoginViewModel extends ChangeNotifier {
       return;
     }
 
-    var result = await NetworkAuthController.login(email, password);
+    var result = await NetworkAuthController().login(email, password);
 
     if (result == LoginStatus.success) {
       status = StatusView.done;

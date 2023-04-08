@@ -43,7 +43,7 @@ class SignUpViewModel extends ChangeNotifier {
     }
 
     var result =
-        await NetworkAuthController.signUp(name, surname, email, password);
+        await NetworkAuthController().signUp(name, surname, email, password);
 
     if (result == SignUpStatus.success) {
       status = StatusView.done;

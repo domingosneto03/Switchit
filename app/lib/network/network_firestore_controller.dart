@@ -20,10 +20,18 @@ class TableCloudItem {
 }
 
 class NetworkFirestoreController {
+  static final NetworkFirestoreController _singleton =
+      NetworkFirestoreController._internal();
+
+  factory NetworkFirestoreController() {
+    return _singleton;
+  }
+
+  NetworkFirestoreController._internal();
+
   // User
 
-  static Future<bool> addUserToCloud(
-      String name, String surname, String email) async {
+  Future<bool> addUserToCloud(String name, String surname, String email) async {
     CollectionReference users =
         FirebaseFirestore.instance.collection(TableCloudUser.name);
 
@@ -48,7 +56,7 @@ class NetworkFirestoreController {
     return isAddedToCloud;
   }
 
-  static Future<bool> getUserFromCloud(String email) async {
+  Future<bool> getUserFromCloud(String email) async {
     CollectionReference users =
         FirebaseFirestore.instance.collection(TableCloudUser.name);
 
@@ -78,7 +86,7 @@ class NetworkFirestoreController {
     return success;
   }
 
-  static Future<bool> removeUserFromCloud(String userId) async {
+  Future<bool> removeUserFromCloud(String userId) async {
     CollectionReference users =
         FirebaseFirestore.instance.collection(TableCloudUser.name);
 
@@ -98,7 +106,7 @@ class NetworkFirestoreController {
 
   // Item
 
-  static Future<bool> addItemCurrentUserToCloud(
+  Future<bool> addItemCurrentUserToCloud(
       String name, String description, String location) async {
     CollectionReference users =
         FirebaseFirestore.instance.collection(TableCloudUser.name);
@@ -123,7 +131,7 @@ class NetworkFirestoreController {
     return isAddedToCloud;
   }
 
-  static Future<List<ItemDataModel>> getItemsCurrentUserCloud() async {
+  Future<List<ItemDataModel>> getItemsCurrentUserCloud() async {
     CollectionReference users =
         FirebaseFirestore.instance.collection(TableCloudUser.name);
 
@@ -151,7 +159,7 @@ class NetworkFirestoreController {
     return items;
   }
 
-  static Future<bool> removeItemFromCloud(String itemId) async {
+  Future<bool> removeItemFromCloud(String itemId) async {
     var userDocId = await DatabaseRealm().getUserDocId();
 
     CollectionReference users =
