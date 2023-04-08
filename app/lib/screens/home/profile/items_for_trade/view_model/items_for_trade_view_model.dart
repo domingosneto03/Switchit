@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:switchit/network/network_firestore_controller.dart';
+import 'package:switchit/network/network_storage_controller.dart';
 import 'package:switchit/screens/home/profile/items_for_trade/view_model/item_data_model.dart';
 import 'package:switchit/util/status_view.dart';
 
@@ -7,6 +8,7 @@ class ItemsForTradeViewModel extends ChangeNotifier {
   StatusView status = StatusView.intial;
   String message = "";
 
+  String newItemImageUrl = "";
   String newItemName = "";
   String newItemDescription = "";
   String newItemLocation = "";
@@ -17,11 +19,41 @@ class ItemsForTradeViewModel extends ChangeNotifier {
     getItemsCurrentUser();
   }
 
+  Future<void> onPhotoSelected(String? imagePath) async {
+    status = StatusView.inProgress;
+
+    notifyListeners();
+
+    try {
+      var result = await NetworkStorageController().uploadPhoto(imagePath!);
+
+      if (result.isEmpty) {
+        message = "Something went wrong";
+        status = StatusView.messageToShow;
+      } else {
+        newItemImageUrl = result;
+        message = "";
+        status = StatusView.done;
+      }
+    } catch (e) {
+      message = "Something went wrong.";
+      status = StatusView.messageToShow;
+    }
+
+    notifyListeners();
+  }
+
   Future<void> createItem() async {
     status = StatusView.inProgress;
 
     notifyListeners();
 
+    if (newItemImageUrl.isEmpty) {
+      message = "Please choose a valid image.";
+      status = StatusView.messageToShow;
+      notifyListeners();
+      return;
+    }
     if (newItemName.isEmpty || newItemName.length < 2) {
       message = "Please enter a valid name.";
       status = StatusView.messageToShow;
@@ -42,7 +74,7 @@ class ItemsForTradeViewModel extends ChangeNotifier {
     }
 
     var result = await NetworkFirestoreController().addItemCurrentUserToCloud(
-        newItemName, newItemDescription, newItemLocation);
+        newItemName, newItemDescription, newItemLocation, newItemImageUrl);
 
     if (result) {
       status = StatusView.done;
