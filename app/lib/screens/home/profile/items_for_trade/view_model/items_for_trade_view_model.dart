@@ -41,7 +41,7 @@ class ItemsForTradeViewModel extends ChangeNotifier {
       return;
     }
 
-    var result = await NetworkFirestoreController.addItemCurrentUserToCloud(
+    var result = await NetworkFirestoreController().addItemCurrentUserToCloud(
         newItemName, newItemDescription, newItemLocation);
 
     if (result) {
@@ -59,7 +59,7 @@ class ItemsForTradeViewModel extends ChangeNotifier {
 
     notifyListeners();
 
-    items = await NetworkFirestoreController.getItemsCurrentUserCloud();
+    items = await NetworkFirestoreController().getItemsCurrentUserCloud();
 
     status = StatusView.done;
 
@@ -71,7 +71,7 @@ class ItemsForTradeViewModel extends ChangeNotifier {
 
     notifyListeners();
 
-    var result = await NetworkFirestoreController.removeItemFromCloud(itemId);
+    var result = await NetworkFirestoreController().removeItemFromCloud(itemId);
 
     if (result) {
       status = StatusView.done;

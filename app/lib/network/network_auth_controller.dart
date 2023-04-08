@@ -18,7 +18,16 @@ class SignUpStatus {
 }
 
 class NetworkAuthController {
-  static Future<bool> isUserAuthenticated() async {
+  static final NetworkAuthController _singleton =
+      NetworkAuthController._internal();
+
+  factory NetworkAuthController() {
+    return _singleton;
+  }
+
+  NetworkAuthController._internal();
+
+  Future<bool> isUserAuthenticated() async {
     var currentUser = FirebaseAuth.instance.currentUser;
 
     if (currentUser != null) {
@@ -32,12 +41,12 @@ class NetworkAuthController {
     }
   }
 
-  static Future<String> login(String email, String password) async {
+  Future<String> login(String email, String password) async {
     try {
       final result = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
       debugPrint('FirebaseAuth (signInWithEmailAndPassword): $result');
-      var success = await NetworkFirestoreController.getUserFromCloud(email);
+      var success = await NetworkFirestoreController().getUserFromCloud(email);
 
       if (!success) {
         return LoginStatus.error;
@@ -58,15 +67,15 @@ class NetworkAuthController {
     }
   }
 
-  static Future<String> signUp(
+  Future<String> signUp(
       String name, String surname, String email, String password) async {
     try {
       final result = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
       debugPrint('FirebaseAuth (createUserWithEmailAndPassword): $result');
 
-      var isAddedToCloud =
-          await NetworkFirestoreController.addUserToCloud(name, surname, email);
+      var isAddedToCloud = await NetworkFirestoreController()
+          .addUserToCloud(name, surname, email);
 
       if (!isAddedToCloud) {
         return SignUpStatus.error;
@@ -83,7 +92,7 @@ class NetworkAuthController {
     }
   }
 
-  static Future<bool> logout() async {
+  Future<bool> logout() async {
     try {
       await FirebaseAuth.instance.signOut();
       debugPrint('FirebaseAuth (logout): success');
@@ -96,7 +105,7 @@ class NetworkAuthController {
     }
   }
 
-  static Future<bool> resetPassword(String email) async {
+  Future<bool> resetPassword(String email) async {
     try {
       await FirebaseAuth.instance.setLanguageCode("en");
       await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
@@ -111,7 +120,7 @@ class NetworkAuthController {
     }
   }
 
-  static Future<bool> deleteAccount() async {
+  Future<bool> deleteAccount() async {
     try {
       final user = FirebaseAuth.instance.currentUser;
       await user?.delete();
@@ -120,7 +129,7 @@ class NetworkAuthController {
 
       var userDocId = await DatabaseRealm().getUserDocId();
       var isRemovedFromCloud =
-          await NetworkFirestoreController.removeUserFromCloud(userDocId!);
+          await NetworkFirestoreController().removeUserFromCloud(userDocId!);
 
       if (!isRemovedFromCloud) {
         return false;

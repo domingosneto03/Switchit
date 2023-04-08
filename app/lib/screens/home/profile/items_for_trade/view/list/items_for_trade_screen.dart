@@ -4,16 +4,11 @@ import 'package:provider/provider.dart';
 import 'package:switchit/screens/home/profile/items_for_trade/view/list/components/body.dart';
 import 'package:switchit/screens/home/profile/items_for_trade/view_model/items_for_trade_view_model.dart';
 
-class ItemsForTradeScreen extends StatefulWidget {
+class ItemsForTradeScreen extends StatelessWidget {
   const ItemsForTradeScreen({super.key});
 
   static String routeName = "/items_for_trade_screen";
 
-  @override
-  State<ItemsForTradeScreen> createState() => _ItemsForTradeScreenState();
-}
-
-class _ItemsForTradeScreenState extends State<ItemsForTradeScreen> {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(

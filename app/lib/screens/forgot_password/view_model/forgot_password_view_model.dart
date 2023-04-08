@@ -21,7 +21,7 @@ class ForgotPasswordViewModel extends ChangeNotifier {
       return;
     }
 
-    var withSuccess = await NetworkAuthController.resetPassword(email);
+    var withSuccess = await NetworkAuthController().resetPassword(email);
 
     if (withSuccess) {
       status = StatusView.done;
