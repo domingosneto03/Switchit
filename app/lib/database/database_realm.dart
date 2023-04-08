@@ -20,6 +20,12 @@ class DatabaseRealm {
     });
   }
 
+  Future<String?> getUserEmail() async {
+    var data = realm.all<UserRealm>();
+    UserRealm user = data[0];
+    return user.email;
+  }
+
   Future<String?> getUserDocId() async {
     var data = realm.all<UserRealm>();
     UserRealm user = data[0];
