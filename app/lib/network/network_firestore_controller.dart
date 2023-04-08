@@ -17,6 +17,7 @@ class TableCloudItem {
   static String fieldItemDescription = "description";
   static String fieldItemLocation = "location";
   static String fieldItemIsTraded = "traded";
+  static String fieldItemImageUrl = "imageUrl";
 }
 
 class NetworkFirestoreController {
@@ -107,7 +108,7 @@ class NetworkFirestoreController {
   // Item
 
   Future<bool> addItemCurrentUserToCloud(
-      String name, String description, String location) async {
+      String name, String description, String location, String imageUrl) async {
     CollectionReference users =
         FirebaseFirestore.instance.collection(TableCloudUser.name);
 
@@ -118,7 +119,8 @@ class NetworkFirestoreController {
       TableCloudItem.fieldItemName: name,
       TableCloudItem.fieldItemDescription: description,
       TableCloudItem.fieldItemLocation: location,
-      TableCloudItem.fieldItemIsTraded: false
+      TableCloudItem.fieldItemIsTraded: false,
+      TableCloudItem.fieldItemImageUrl: imageUrl
     }).then((value) {
       debugPrint("FirebaseFirestore (addItemToCloud): Item Added");
       isAddedToCloud = true;
@@ -147,11 +149,13 @@ class NetworkFirestoreController {
       String description = doc.get(TableCloudItem.fieldItemDescription);
       String location = doc.get(TableCloudItem.fieldItemLocation);
       bool isTraded = doc.get(TableCloudItem.fieldItemIsTraded);
+      String imageUrl = doc.get(TableCloudItem.fieldItemImageUrl);
 
       debugPrint(
-          "FirebaseFirestore (getItemsCurrentUserCloud): ItemDataModel-> name: $name, description: $description, location: $location, isTraded: $isTraded");
+          "FirebaseFirestore (getItemsCurrentUserCloud): ItemDataModel-> name: $name, description: $description, location: $location, isTraded: $isTraded, imageUrl: $imageUrl");
 
-      items.add(ItemDataModel(id, name, description, location, isTraded));
+      items.add(
+          ItemDataModel(id, name, description, location, isTraded, imageUrl));
     }
 
     debugPrint("FirebaseFirestore (getItemsCurrentUserCloud): Success");

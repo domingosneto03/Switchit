@@ -19,7 +19,7 @@ class NetworkStorageController {
   Future<String> uploadPhoto(String imagePath) async {
     final file = File(imagePath);
 
-    var userEmail = await DatabaseRealm().getUseEmail();
+    var userEmail = await DatabaseRealm().getUserEmail();
 
     var destination = 'users/$userEmail';
     var itemName = DateTime.now().millisecondsSinceEpoch.toString();
