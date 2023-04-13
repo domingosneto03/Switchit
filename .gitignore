@@ -6,5 +6,7 @@ app/.idea
 app/android
 app/build
 app/ios
+app/macos
 app/linux
+app/web
 app/windows
