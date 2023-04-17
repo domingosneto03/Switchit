@@ -31,10 +31,10 @@ The view is responsible for defining the structure, layout, and appearance of wh
 
 The view model implements properties and commands to which the view can data bind to, and notifies the view of any state changes through change notification events. The properties and commands that the view model provides define the functionality to be offered by the UI, but the view determines how that functionality is to be displayed. The view model is also responsible for coordinating the view's interactions with any model classes that are required.
 
-![mvvm_pattern]()
+![mvvm-pattern](https://user-images.githubusercontent.com/93836583/232473701-6c5c1006-78f6-4de6-8d77-02d954d3e7e3.png)
 
 ### Realm
-Realm is a mobile database that runs directly inside phones, tablets or wearables. This repository holds the source code for the Realm SDK for Flutter and Dart.
+Realm has been implemented in this project and it is a mobile database that runs directly inside phones, tablets or wearables. This repository holds the source code for the Realm SDK for Flutter and Dart.
 ### Vertical prototype
 To begin, it was implemented the login screen which is the first point of entry for a user into a system. In order to create this feature, it was designed a user interface that prompts the user for their login credentials, such as an email and password.
 
