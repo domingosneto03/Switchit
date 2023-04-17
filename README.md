@@ -16,6 +16,8 @@ You can find here details about the app, from a high-level vision to low-level i
 * [Architecture and Design](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T3/blob/main/docs/ArchitectureAndDesign.md)
   * [Logical architecture](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T3/blob/main/docs/ArchitectureAndDesign.md#logical-architecture)
   * [Physical architecture](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T3/blob/main/docs/ArchitectureAndDesign.md#physical-architecture)
+  * [Model-View-ViewModel](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T3/blob/main/docs/ArchitectureAndDesign.md#model-view-viewmodel-mvvm)
+  * [Realm](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T3/blob/main/docs/ArchitectureAndDesign.md#realm)
   * [Vertical prototype](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T3/blob/main/docs/ArchitectureAndDesign.md#vertical-prototype)
 * [Implementation]
 * [Test]
