@@ -24,6 +24,17 @@ Finally, the database management system used by Switchit is Firebase. Firebase i
 
 ![physical architeture drawio](https://user-images.githubusercontent.com/94236502/224554438-0e223175-47d1-4667-842b-b7055fafb143.png)
 
+### Model-View-ViewModel (MVVM)
+The MVVM pattern has been implemented in this project and it helps cleanly separate an application's business and presentation logic from its user interface (UI). Maintaining a clean separation between application logic and the UI helps address numerous development issues and makes an application easier to test, maintain, and evolve. It can also significantly improve code re-use opportunities and allows developers and UI designers to collaborate more easily when developing their respective parts of an app.
+
+The view is responsible for defining the structure, layout, and appearance of what the user sees on screen.
+
+The view model implements properties and commands to which the view can data bind to, and notifies the view of any state changes through change notification events. The properties and commands that the view model provides define the functionality to be offered by the UI, but the view determines how that functionality is to be displayed. The view model is also responsible for coordinating the view's interactions with any model classes that are required.
+
+![mvvm_pattern]()
+
+### Realm
+Realm is a mobile database that runs directly inside phones, tablets or wearables. This repository holds the source code for the Realm SDK for Flutter and Dart.
 ### Vertical prototype
 To begin, it was implemented the login screen which is the first point of entry for a user into a system. In order to create this feature, it was designed a user interface that prompts the user for their login credentials, such as an email and password.
 
