@@ -68,7 +68,7 @@ class _BodyState extends State<Body> {
                 )
               ],
             ),
-            const SizedBox(height: 60),
+            const SizedBox(height: 55),
             Column(
               children: [
                 Wrap(
