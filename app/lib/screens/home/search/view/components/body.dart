@@ -4,7 +4,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:provider/provider.dart';
-import 'package:switchit/screens/home/search/user_notifier.dart';
 import 'package:switchit/util/status_view.dart';
 import 'package:switchit/util/ui/components/default_dialog.dart';
 import 'package:switchit/screens/home/profile/items_for_trade/view_model/item_data_model.dart';
@@ -33,7 +32,6 @@ class _BodyState extends State<Body> {
   Widget build(BuildContext context) {
     List<ItemDataModel>items=[];
     List<ItemDataModel>users=[];
-    UserNotifier userNotifier = Provider.of<UserNotifier>(context, listen: false);
     return Scaffold(
         body: CustomScrollView(
           slivers:<Widget>[
