@@ -5,13 +5,10 @@ import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:provider/provider.dart';
 import 'package:switchit/util/status_view.dart';
 import 'package:switchit/util/ui/components/default_dialog.dart';
-import 'package:switchit/screens/home/search/view_model/items_for_trade_view_model.dart';
 import 'package:switchit/screens/home/profile/items_for_trade/view_model/item_data_model.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:switchit/screens/home/search/view/components/custom_search_delegate.dart';
-
-import '../../view_model/user_data_model.dart';
-import '../../view_model/user_view_model.dart';
+import 'package:switchit/screens/home/search/view_model/user_data_model.dart';
 
 
 class Body extends StatefulWidget {
@@ -23,13 +20,11 @@ class Body extends StatefulWidget {
 
 class _BodyState extends State<Body> {
   late CustomSearchDelegate _delegate;
-  late ItemsForTradeViewModel viewModel;
 
   @override
   void initState() {
     super.initState();
     _delegate = CustomSearchDelegate();
-    viewModel = ItemsForTradeViewModel();
   }
 
   @override
@@ -93,38 +88,6 @@ class _BodyState extends State<Body> {
     );
   }
 
-  Future<void> _getItems(
-      BuildContext context, ItemsForTradeViewModel viewModel) async {
-    final loading = ProgressHUD.of(context);
-
-    await viewModel.getItems();
-
-    switch (viewModel.status) {
-      case StatusView.intial:
-        loading?.dismiss();
-        break;
-      case StatusView.inProgress:
-        loading?.show();
-        break;
-      case StatusView.messageToShow:
-        loading?.dismiss();
-
-        setState(() {
-          showAlertDialog(
-              context: context,
-              title: "Alert",
-              message: viewModel.message,
-              cancelActionText: null,
-              defaultActionText: "Ok",
-              onDefaultActionPressed: () {});
-        });
-        break;
-      case StatusView.done:
-        loading?.dismiss();
-
-        break;
-    }
-  }
 
   String getRandomItemImage(List<ItemDataModel> lista){
     Random random = Random();
