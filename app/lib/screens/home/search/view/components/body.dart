@@ -4,9 +4,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:provider/provider.dart';
+import 'package:switchit/screens/home/profile/items_for_trade/view_model/item_data_model.dart';
+import 'package:switchit/screens/home/search/view_model/items_to_trade_view_model.dart';
 import 'package:switchit/util/status_view.dart';
 import 'package:switchit/util/ui/components/default_dialog.dart';
-import 'package:switchit/screens/home/profile/items_for_trade/view_model/item_data_model.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:switchit/screens/home/search/view/components/custom_search_delegate.dart';
 import 'package:switchit/screens/home/search/view_model/user_data_model.dart';
@@ -21,23 +22,21 @@ class Body extends StatefulWidget {
 
 class _BodyState extends State<Body> {
   late CustomSearchDelegate _delegate;
+  late ItemsForTradeViewModel viewModel;
 
   @override
   void initState() {
     super.initState();
     _delegate = CustomSearchDelegate();
+    viewModel = ItemsForTradeViewModel();
   }
 
   @override
   Widget build(BuildContext context) {
-    List<ItemDataModel>items=[];
-    List<ItemDataModel>users=[];
     return Scaffold(
-        body: CustomScrollView(
-          slivers:<Widget>[
-            SliverToBoxAdapter(
-              child:Container(
-              child: ElevatedButton.icon(
+        body: Column(
+          children:<Widget>[
+              child:ElevatedButton.icon(
                 icon: const Icon(Icons.search),
                 style: ElevatedButton.styleFrom(
                   foregroundColor: Colors.black87,
@@ -55,42 +54,81 @@ class _BodyState extends State<Body> {
                   );
                 },
               ),
-              ),
-            ),
             Expanded(
-                child: SliverGrid(
-                  gridDelegate: SliverQuiltedGridDelegate(
-                      crossAxisCount: 4,
-                      mainAxisSpacing: 4,
-                      crossAxisSpacing: 4,
-                      pattern: [
-                        const QuiltedGridTile(2, 2),
-                        const QuiltedGridTile(2, 2),
-                        const QuiltedGridTile(2, 2),
-                        const QuiltedGridTile(2, 2),
-                        const QuiltedGridTile(2, 2),
-                        const QuiltedGridTile(2, 2),
-                        const QuiltedGridTile(2, 2),
-                        const QuiltedGridTile(2, 2),
-                      ]
-                  ),
-                  delegate: SliverChildBuilderDelegate(
-                      childCount: 10,
-                          (context,index)=>Container(
-                        decoration: const BoxDecoration(
-                            image: DecorationImage(
-                                image: NetworkImage('')
-                                ),
-                            )
-                        ),
-                      )
-                  ),
-                ),
+                flex: 1,
+                child: RefreshIndicator(
+                    onRefresh: () async {
+                      await _getItems(context, viewModel);
+                    },
+                    child: (() {
+                      if (viewModel.status == StatusView.inProgress) {
+                        return const Center(child: CircularProgressIndicator());
+                      } else if (viewModel.users.isEmpty) {
+                        return const Center(child: Text("You don't have items."));
+                      } else {
+                        return ListView.builder(
+                            itemCount: viewModel.users.length,
+                            itemBuilder: (context, index) {
+                              final user = viewModel.users[index];
+
+                              return Dismissible(
+                                  key: Key(user.name),
+                                  background: Container(color: Colors.red),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                                    children: <Widget>[
+                                      const ClipRRect(
+                                        borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(8.0),
+                                          topRight: Radius.circular(8.0),
+                                        ),
+                                      ),
+                                      ListTile(
+                                        title: Text(user.name),
+                                        subtitle: Text(user.surname),
+                                      ),
+                                    ],
+                                  ));
+                            });
+                      }
+                    }()))),
           ],
         ),
     );
   }
 
+  Future<void> _getItems(
+      BuildContext context, ItemsForTradeViewModel viewModel) async {
+    final loading = ProgressHUD.of(context);
+
+    await viewModel.getAllItems();
+
+    switch (viewModel.status) {
+      case StatusView.intial:
+        loading?.dismiss();
+        break;
+      case StatusView.inProgress:
+        loading?.show();
+        break;
+      case StatusView.messageToShow:
+        loading?.dismiss();
+
+        setState(() {
+          showAlertDialog(
+              context: context,
+              title: "Alert",
+              message: viewModel.message,
+              cancelActionText: null,
+              defaultActionText: "Ok",
+              onDefaultActionPressed: () {});
+        });
+        break;
+      case StatusView.done:
+        loading?.dismiss();
+
+        break;
+    }
+  }
 
   String getRandomItemImage(List<ItemDataModel> lista){
     Random random = Random();

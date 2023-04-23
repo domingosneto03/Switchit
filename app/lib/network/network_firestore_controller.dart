@@ -192,4 +192,34 @@ class NetworkFirestoreController {
 
     return isRemovedFromCloud;
   }
+
+  Future<List<UserDataModel>> getAllUsers() async {
+    CollectionReference users =
+    FirebaseFirestore.instance.collection(TableCloudUser.name);
+
+    var userDocId = await DatabaseRealm().getUserDocId();
+
+    List<UserDataModel> usersList = [];
+
+    var data = await users.where('id', isNotEqualTo: userDocId).get();
+
+    for (var doc in data.docs) {
+      String id = doc.id;
+      String name = doc.get(TableCloudUser.fieldUserName);
+      String surname = doc.get(TableCloudUser.fieldUserSurname);
+      String email = doc.get(TableCloudUser.fieldUserEmail);
+      List<ItemDataModel> itemsList = doc.get(TableCloudUser.fieldUserItems);
+
+      debugPrint(
+          "FirebaseFirestore (getItemsCurrentUserCloud): ItemDataModel-> name: $name, surname: $surname, email: $email, items: $itemsList");
+
+      usersList.add(
+          UserDataModel(id, name, surname, email, itemsList));
+    }
+
+    debugPrint("FirebaseFirestore (getItemsCurrentUserCloud): Success");
+
+    return usersList;
+  }
+
 }

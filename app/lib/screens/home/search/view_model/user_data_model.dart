@@ -7,11 +7,5 @@ class UserDataModel {
   String email = "";
   List<ItemDataModel> items = [];
 
-  UserDataModel.fromMap(Map<String, dynamic> data){
-    id = data['id'];
-    name = data[name];
-    surname = data['surname'];
-    email = data['email'];
-    items = data['items'];
-  }
+  UserDataModel(this.id, this.name, this.surname, this.email, this.items);
 }
