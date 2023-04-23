@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:provider/provider.dart';
@@ -6,6 +8,10 @@ import 'package:switchit/util/ui/components/default_dialog.dart';
 import 'package:switchit/screens/home/search/view_model/items_for_trade_view_model.dart';
 import 'package:switchit/screens/home/profile/items_for_trade/view_model/item_data_model.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:switchit/screens/home/search/view/components/custom_search_delegate.dart';
+
+import '../../view_model/user_data_model.dart';
+import '../../view_model/user_view_model.dart';
 
 
 class Body extends StatefulWidget {
@@ -17,20 +23,17 @@ class Body extends StatefulWidget {
 
 class _BodyState extends State<Body> {
   late CustomSearchDelegate _delegate;
-
-
-  List<ItemDataModel> itemsList = [];
+  late ItemsForTradeViewModel viewModel;
 
   @override
   void initState() {
     super.initState();
     _delegate = CustomSearchDelegate();
-
+    viewModel = ItemsForTradeViewModel();
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
         body: CustomScrollView(
           slivers:<Widget>[
@@ -76,110 +79,57 @@ class _BodyState extends State<Body> {
                   delegate: SliverChildBuilderDelegate(
                       childCount: 10,
                           (context,index)=>Container(
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                             image: DecorationImage(
-                                image: NetworkImage('https://picsum.photos/500/500?random=$index')
+                                image: NetworkImage('')
+                                ),
                             )
                         ),
                       )
                   ),
                 ),
-              ),
           ],
         ),
     );
   }
-}
 
-class CustomSearchDelegate extends SearchDelegate {
+  Future<void> _getItems(
+      BuildContext context, ItemsForTradeViewModel viewModel) async {
+    final loading = ProgressHUD.of(context);
 
-  bool recentFlag = true;
+    await viewModel.getItems();
 
-  List<ItemDataModel> itemList = [];
+    switch (viewModel.status) {
+      case StatusView.intial:
+        loading?.dismiss();
+        break;
+      case StatusView.inProgress:
+        loading?.show();
+        break;
+      case StatusView.messageToShow:
+        loading?.dismiss();
 
-  List<dynamic> recent = [];
+        setState(() {
+          showAlertDialog(
+              context: context,
+              title: "Alert",
+              message: viewModel.message,
+              cancelActionText: null,
+              defaultActionText: "Ok",
+              onDefaultActionPressed: () {});
+        });
+        break;
+      case StatusView.done:
+        loading?.dismiss();
 
-  List<ItemDataModel> suggestionsList=[];
-
-  // clear the search text
-  @override
-  List<Widget>? buildActions(BuildContext context) {
-    return [
-      IconButton(
-        onPressed: () {
-          query = '';
-        },
-        icon: const Icon(Icons.clear),
-      ),
-    ];
-  }
-
-  // pop out of search menu
-  @override
-  Widget? buildLeading(BuildContext context) {
-    return IconButton(
-      onPressed: () {
-        close(context, null);
-      },
-      icon: const Icon(Icons.arrow_back),
-    );
-  }
-
-  // show query result
-  @override
-  Widget buildResults(BuildContext context) {
-
-    return ListView.builder(
-      itemCount: suggestionsList.length,
-      itemBuilder: (context, index) {
-        var result = suggestionsList[index];
-        return ListTile(
-          title: Text(result.name),
-        );
-      },
-    );
-  }
-
-
-  // querying process at the runtime
-  @override
-  Widget buildSuggestions(BuildContext context) {
-    final recentList = query.isEmpty
-        ? recent
-        : itemList.where((p) => p.name.toLowerCase().contains(query.toLowerCase())).toList();
-    return ListView.builder(
-      itemCount: recentList.length,
-      itemBuilder: (context, index) {
-        dynamic result = recentList[index];
-        return GestureDetector(
-          onTap: () {
-            if (result is ItemDataModel) {
-              if (recent.contains(result)) {
-                recent.remove(result);
-              }
-              recent.insert(0, result);
-              recentFlag = false;
-              showResults(context);
-            }
-          },
-          child: ListTile(
-            title: result is ItemDataModel ? Text(result.name) : Text(result),
-            leading: result is ItemDataModel ? const Icon(Icons.image) : const Icon(Icons.search),
-          ),
-        );
-      },
-    );
-  }
-
-  @override
-  void showResults(BuildContext context) {
-    super.showResults(context);
-    if(query.isNotEmpty && recentFlag ) {
-      if (recent.contains(query)) {
-        recent.remove(query);
-      }
-      recent.insert(0, query);
+        break;
     }
-    recentFlag = true;
   }
+
+  String getRandomItemImage(List<ItemDataModel> lista){
+    Random random = Random();
+    int randomNumber = random.nextInt(lista.length);
+    return lista[randomNumber].imageUrl;
+  }
+
 }
