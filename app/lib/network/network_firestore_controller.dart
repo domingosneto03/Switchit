@@ -193,7 +193,7 @@ class NetworkFirestoreController {
     return isRemovedFromCloud;
   }
 
-  Future<List<UserDataModel>> getAllUsers() async {
+  Future<List<UserDataModel>> getAllUsersCloud() async {
     CollectionReference users =
     FirebaseFirestore.instance.collection(TableCloudUser.name);
 
@@ -220,6 +220,45 @@ class NetworkFirestoreController {
     debugPrint("FirebaseFirestore (getItemsCurrentUserCloud): Success");
 
     return usersList;
+  }
+
+  Future<List<ItemDataModel>> getItemsUserCloud(UserDataModel user) async {
+    CollectionReference users =
+    FirebaseFirestore.instance.collection(TableCloudUser.name);
+
+    var userDocId = user.id;
+
+    List<ItemDataModel> items = [];
+
+    var data = await users.doc(userDocId).collection(TableCloudItem.name).get();
+
+    for (var doc in data.docs) {
+      String id = doc.id;
+      String name = doc.get(TableCloudItem.fieldItemName);
+      String description = doc.get(TableCloudItem.fieldItemDescription);
+      String location = doc.get(TableCloudItem.fieldItemLocation);
+      bool isTraded = doc.get(TableCloudItem.fieldItemIsTraded);
+      String imageUrl = doc.get(TableCloudItem.fieldItemImageUrl);
+
+      debugPrint(
+          "FirebaseFirestore (getItemsCurrentUserCloud): ItemDataModel-> name: $name, description: $description, location: $location, isTraded: $isTraded, imageUrl: $imageUrl");
+
+      items.add(
+          ItemDataModel(id, name, description, location, isTraded, imageUrl));
+    }
+
+    debugPrint("FirebaseFirestore (getItemsCurrentUserCloud): Success");
+
+    return items;
+  }
+
+  Future<List<ItemDataModel>> getAllItemsCloud() async {
+    List<ItemDataModel> itemsList = [];
+    List<UserDataModel> users = getAllUsersCloud() as List<UserDataModel>;
+    for(UserDataModel user in users){
+      itemsList.addAll(getItemsUserCloud(user) as Iterable<ItemDataModel>);
+    }
+    return itemsList;
   }
 
 }
