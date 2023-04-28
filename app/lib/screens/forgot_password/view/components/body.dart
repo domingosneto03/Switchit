@@ -27,12 +27,12 @@ class _BodyState extends State<Body> {
       child: Center(
         child: Column(
           children: [
-            Row(
+            const Row(
               children: [
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(25, 20, 0, 0),
+                  padding: EdgeInsets.fromLTRB(25, 20, 0, 0),
                   child: Row(
-                    children: const [
+                    children: [
                       Text(
                         'Forgot Password',
                         style: TextStyle(
@@ -47,8 +47,8 @@ class _BodyState extends State<Body> {
                 ),
               ],
             ),
-            Row(
-              children: const [
+            const Row(
+              children: [
                 Padding(
                   padding: EdgeInsets.fromLTRB(25, 5, 0, 15),
                   child: Text(

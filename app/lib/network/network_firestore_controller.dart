@@ -3,6 +3,8 @@ import 'package:flutter/foundation.dart';
 import 'package:switchit/database/database_realm.dart';
 import 'package:switchit/screens/home/profile/items_for_trade/view_model/item_data_model.dart';
 
+import 'package:switchit/screens/home/search/view_model/user_data_model.dart';
+
 class TableCloudUser {
   static String name = "users";
   static String fieldUserName = "name";
@@ -113,6 +115,7 @@ class NetworkFirestoreController {
         FirebaseFirestore.instance.collection(TableCloudUser.name);
 
     var userDocId = await DatabaseRealm().getUserDocId();
+
     var isAddedToCloud = false;
 
     await users.doc(userDocId).collection(TableCloudItem.name).add({
@@ -133,11 +136,9 @@ class NetworkFirestoreController {
     return isAddedToCloud;
   }
 
-  Future<List<ItemDataModel>> getItemsCurrentUserCloud() async {
+  Future<List<ItemDataModel>> getItemsUserCloud(String userDocId) async {
     CollectionReference users =
         FirebaseFirestore.instance.collection(TableCloudUser.name);
-
-    var userDocId = await DatabaseRealm().getUserDocId();
 
     List<ItemDataModel> items = [];
 
@@ -186,5 +187,47 @@ class NetworkFirestoreController {
     });
 
     return isRemovedFromCloud;
+  }
+
+  Future<List<UserDataModel>> getAllItemsCloud() async {
+    CollectionReference users =
+        FirebaseFirestore.instance.collection(TableCloudUser.name);
+
+    var userDocId = await DatabaseRealm().getUserDocId();
+
+    List<UserDataModel> usersList = [];
+
+    var data = await users.get();
+
+    for (var doc in data.docs) {
+      String id = doc.id;
+
+      if (userDocId != id) {
+        String name = doc.get(TableCloudUser.fieldUserName);
+        String surname = doc.get(TableCloudUser.fieldUserSurname);
+        String email = doc.get(TableCloudUser.fieldUserEmail);
+
+        var items = await getItemsUserCloud(doc.id);
+
+        debugPrint(
+            "FirebaseFirestore (getItemsCurrentUserCloud): ItemDataModel-> name: $name, surname: $surname, email: $email, items: $items");
+
+        usersList.add(UserDataModel(id, name, surname, email, items));
+      }
+    }
+
+    debugPrint("FirebaseFirestore (getItemsCurrentUserCloud): Success");
+
+    return usersList;
+  }
+
+  Future<List<ItemDataModel>> getAllItems() async {
+    List<ItemDataModel> itemsList = [];
+    List<UserDataModel> usersData = await getAllItemsCloud();
+
+    for (UserDataModel user in usersData) {
+      itemsList.addAll(user.items);
+    }
+    return itemsList;
   }
 }

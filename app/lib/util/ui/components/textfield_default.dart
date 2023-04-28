@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class TextFieldDefault extends StatelessWidget {
-  final controller;
-  final onChanged;
-  final keyboardType;
+  final TextEditingController controller;
+  final dynamic onChanged;
+  final dynamic keyboardType;
   final String hintText;
   final bool obscureText;
 

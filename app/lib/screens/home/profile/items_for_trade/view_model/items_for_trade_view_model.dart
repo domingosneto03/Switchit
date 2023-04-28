@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:switchit/database/database_realm.dart';
 import 'package:switchit/network/network_firestore_controller.dart';
 import 'package:switchit/network/network_storage_controller.dart';
 import 'package:switchit/screens/home/profile/items_for_trade/view_model/item_data_model.dart';
@@ -91,7 +92,9 @@ class ItemsForTradeViewModel extends ChangeNotifier {
 
     notifyListeners();
 
-    items = await NetworkFirestoreController().getItemsCurrentUserCloud();
+    var userDocId = await DatabaseRealm().getUserDocId();
+
+    items = await NetworkFirestoreController().getItemsUserCloud(userDocId!);
 
     status = StatusView.done;
 
