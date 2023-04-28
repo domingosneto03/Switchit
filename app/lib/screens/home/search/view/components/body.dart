@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:provider/provider.dart';
@@ -7,7 +5,6 @@ import 'package:switchit/screens/home/search/view_model/items_to_trade_view_mode
 import 'package:switchit/util/status_view.dart';
 import 'package:switchit/util/ui/components/default_dialog.dart';
 import 'package:switchit/screens/home/search/view/components/custom_search_delegate.dart';
-import 'package:switchit/screens/home/profile/items_for_trade/view_model/item_data_model.dart';
 
 class Body extends StatefulWidget {
   const Body({Key? key}) : super(key: key);
@@ -23,7 +20,7 @@ class BodyState extends State<Body> {
   @override
   void initState() {
     super.initState();
-    _delegate = CustomSearchDelegate();
+    //_delegate = CustomSearchDelegate();
   }
 
   @override
@@ -70,25 +67,31 @@ class BodyState extends State<Body> {
                           itemCount: viewModel.items.length,
                           itemBuilder: (context, index) {
                             final item = viewModel.items[index];
-                            return Dismissible(
-                                key: Key(item.name),
-                                background: Container(color: Colors.red),
-                                child: Column(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.stretch,
-                                  children: <Widget>[
-                                    const ClipRRect(
-                                      borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(8.0),
-                                        topRight: Radius.circular(8.0),
-                                      ),
-                                    ),
-                                    ListTile(
-                                      title: Text(item.name),
-                                      subtitle: Text(item.description),
-                                    ),
-                                  ],
-                                ));
+
+                            return Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: <Widget>[
+                                ClipRRect(
+                                  borderRadius: const BorderRadius.only(
+                                    topLeft: Radius.circular(8.0),
+                                    topRight: Radius.circular(8.0),
+                                  ),
+                                  child: Image.network(item.imageUrl,
+                                      height: 250,
+                                      fit: BoxFit.cover, loadingBuilder:
+                                          (context, child, loadingProgress) {
+                                    if (loadingProgress != null) {
+                                      return const CircularProgressIndicator();
+                                    }
+                                    return child;
+                                  }),
+                                ),
+                                ListTile(
+                                  title: Text(item.name),
+                                  subtitle: Text(item.description),
+                                ),
+                              ],
+                            );
                           });
                     }
                   }()))),
@@ -128,11 +131,5 @@ class BodyState extends State<Body> {
 
         break;
     }
-  }
-
-  String getRandomItemImage(List<ItemDataModel> lista) {
-    Random random = Random();
-    int randomNumber = random.nextInt(lista.length);
-    return lista[randomNumber].imageUrl;
   }
 }
