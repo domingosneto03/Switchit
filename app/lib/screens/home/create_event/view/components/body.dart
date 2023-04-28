@@ -5,11 +5,11 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return const SafeArea(
       child: SizedBox(
         width: double.infinity,
         child: Column(
-          children: const [],
+          children: [],
         ),
       ),
     );

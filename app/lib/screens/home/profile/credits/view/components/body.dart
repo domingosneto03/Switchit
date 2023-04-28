@@ -34,10 +34,10 @@ class Body extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       children: [
-        Padding(
-          padding: const EdgeInsets.all(20.0),
+        const Padding(
+          padding: EdgeInsets.all(20.0),
           child: Column(
-            children: const [
+            children: [
               Text(
                 'Switchit\'s Vision',
                 style: TextStyle(fontSize: 20.0),
@@ -49,10 +49,10 @@ class Body extends StatelessWidget {
             ],
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.all(20.0),
+        const Padding(
+          padding: EdgeInsets.all(20.0),
           child: Column(
-            children: const [
+            children: [
               Text(
                 'Collaboration',
                 style: TextStyle(fontSize: 20.0),

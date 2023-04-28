@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:switchit/app/routes.dart';
 import 'package:switchit/network/network_auth_controller.dart';
 import 'package:switchit/network/network_controller.dart';

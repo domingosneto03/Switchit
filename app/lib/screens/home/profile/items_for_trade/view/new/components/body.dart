@@ -57,8 +57,8 @@ class _BodyState extends State<Body> {
                   ),
                 ],
               ),
-              Row(
-                children: const [
+              const Row(
+                children: [
                   Padding(
                     padding: EdgeInsets.fromLTRB(25, 5, 0, 15),
                     child: Text(

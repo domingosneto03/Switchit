@@ -8,23 +8,21 @@ class ItemsForTradeViewModel extends ChangeNotifier {
 
   List<ItemDataModel> items = [];
 
-  String message ='';
+  String message = '';
 
   ItemsForTradeViewModel() {
     getAllItems();
   }
-
 
   Future<void> getAllItems() async {
     status = StatusView.inProgress;
 
     notifyListeners();
 
-    items = await NetworkFirestoreController().getAllItemsCloud();
+    items = await NetworkFirestoreController().getAllItems();
 
     status = StatusView.done;
 
     notifyListeners();
   }
-
 }
