@@ -11,14 +11,14 @@ class NameCard extends StatelessWidget {
       elevation: 3,
       child: Column(
         children: [
-          Image.asset(param['image'],
+          Image.asset(
+            param['image'],
           ),
           ListTile(
             title: Text(param['name']),
             subtitle: Text(param['up_id']),
           )
         ],
-
       ),
     );
   }
