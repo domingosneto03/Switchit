@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:switchit/screens/home/search/view/components/body.dart';
+import 'package:switchit/screens/home/search/view_model/items_to_trade_view_model.dart';
 
 class SearchTabScreen extends StatelessWidget {
   const SearchTabScreen({super.key});
@@ -8,10 +10,14 @@ class SearchTabScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: const Text('Search'),
-        ),
-        body: const Body());
+    return MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (_) => ItemsForTradeViewModel())
+        ],
+        child: Scaffold(
+            appBar: AppBar(
+              title: const Text('Search'),
+            ),
+            body: const Body()));
   }
 }
