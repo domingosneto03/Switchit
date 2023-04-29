@@ -7,6 +7,7 @@ class ItemsForTradeViewModel extends ChangeNotifier {
   StatusView status = StatusView.intial;
 
   List<ItemDataModel> items = [];
+  List<ItemDataModel> originalItems = [];
 
   String message = '';
 
@@ -20,8 +21,17 @@ class ItemsForTradeViewModel extends ChangeNotifier {
     notifyListeners();
 
     items = await NetworkFirestoreController().getAllItems();
+    originalItems = items;
 
     status = StatusView.done;
+
+    notifyListeners();
+  }
+
+  void filterSearchResults(String query) {
+    items = originalItems
+        .where((item) => item.name.toLowerCase().contains(query.toLowerCase()))
+        .toList();
 
     notifyListeners();
   }

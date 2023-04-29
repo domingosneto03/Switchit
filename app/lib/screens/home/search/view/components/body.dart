@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import 'package:switchit/screens/home/search/view_model/items_to_trade_view_model.dart';
 import 'package:switchit/util/status_view.dart';
 import 'package:switchit/util/ui/components/default_dialog.dart';
-import 'package:switchit/screens/home/search/view/components/custom_search_delegate.dart';
 
 class Body extends StatefulWidget {
   const Body({Key? key}) : super(key: key);
@@ -14,14 +13,9 @@ class Body extends StatefulWidget {
 }
 
 class BodyState extends State<Body> {
-  late CustomSearchDelegate _delegate;
   late ItemsForTradeViewModel viewModel;
 
-  @override
-  void initState() {
-    super.initState();
-    //_delegate = CustomSearchDelegate();
-  }
+  TextEditingController editingController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -33,24 +27,27 @@ class BodyState extends State<Body> {
           const SizedBox(
             height: 10,
           ),
-          ElevatedButton.icon(
-            icon: const Icon(Icons.search),
-            style: ElevatedButton.styleFrom(
-              foregroundColor: Colors.black87,
-              backgroundColor: Colors.white54,
-              shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(70))),
-              alignment: Alignment.centerLeft,
-              fixedSize: const Size(387, 10),
-            ),
-            label: const Text('Search'),
-            onPressed: () {
-              showSearch(
-                  context: context,
-                  // delegate to customize the search bar
-                  delegate: _delegate);
-            },
-          ),
+          Padding(
+              padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+              child: TextField(
+                controller: editingController,
+                onChanged: (value) {
+                  viewModel.filterSearchResults(value);
+                },
+                decoration: InputDecoration(
+                    labelText: "Search",
+                    hintText: "Search",
+                    prefixIcon: const Icon(Icons.search),
+                    suffixIcon: IconButton(
+                      onPressed: () {
+                        editingController.clear();
+                        viewModel.filterSearchResults("");
+                      },
+                      icon: const Icon(Icons.clear),
+                    ),
+                    border: const OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(25.0)))),
+              )),
           Expanded(
               flex: 1,
               child: RefreshIndicator(
@@ -61,7 +58,7 @@ class BodyState extends State<Body> {
                     if (viewModel.status == StatusView.inProgress) {
                       return const Center(child: CircularProgressIndicator());
                     } else if (viewModel.items.isEmpty) {
-                      return const Center(child: Text("You don't have items."));
+                      return const Center(child: Text("No Results Found."));
                     } else {
                       return ListView.builder(
                           itemCount: viewModel.items.length,
