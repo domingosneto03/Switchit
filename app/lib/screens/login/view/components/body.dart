@@ -55,8 +55,8 @@ class _BodyState extends State<Body> {
                   ),
                 ],
               ),
-              const Row(
-                children: [
+              Row(
+                children: const [
                   Padding(
                     padding: EdgeInsets.fromLTRB(25, 5, 0, 15),
                     child: Text(
@@ -93,11 +93,12 @@ class _BodyState extends State<Body> {
                 onTap: () {
                   Navigator.pushNamed(context, ForgotPasswordScreen.routeName);
                 },
-                child: const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
+                    children: const [
                       Text(
                         'Forgot Password?',
                         style: TextStyle(
