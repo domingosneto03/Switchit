@@ -21,7 +21,7 @@ class _FollowerCardState extends State<FollowerCard> {
           leading: Image.asset('assets/icons/ic_user.png'),
           title: const Text("Constâncio"),
           trailing: SizedBox(
-            width: 91,
+            width: 100,
             child: ElevatedButton(
               style: ButtonStyle(
                 padding: MaterialStateProperty.all(const EdgeInsets.only(left: 15, right: 15)),
