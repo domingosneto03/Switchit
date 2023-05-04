@@ -11,6 +11,7 @@ class TableCloudUser {
   static String fieldUserSurname = "surname";
   static String fieldUserEmail = "email";
   static String fieldUserItems = "items";
+  static String fieldUserPhotoUrl = "photoUrl";
 }
 
 class TableCloudItem {
@@ -206,13 +207,20 @@ class NetworkFirestoreController {
         String name = doc.get(TableCloudUser.fieldUserName);
         String surname = doc.get(TableCloudUser.fieldUserSurname);
         String email = doc.get(TableCloudUser.fieldUserEmail);
+        String photoUrl = doc.get(TableCloudUser.fieldUserPhotoUrl);
 
         var items = await getItemsUserCloud(doc.id);
 
         debugPrint(
             "FirebaseFirestore (getItemsCurrentUserCloud): ItemDataModel-> name: $name, surname: $surname, email: $email, items: $items");
 
-        usersList.add(UserDataModel(id, name, surname, email, items));
+        usersList.add(UserDataModel(
+            id: id,
+            name: name,
+            surname: surname,
+            email: email,
+            items: items,
+            photoUrl: photoUrl));
       }
     }
 
