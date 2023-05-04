@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:switchit/models/user_data_model.dart';
 
 class FollowerCard extends StatefulWidget {
-  const FollowerCard({Key? key}) : super(key: key);
+  final UserDataModel follower;
+  const FollowerCard({required this.follower, Key? key}) : super(key: key);
 
   @override
   State<FollowerCard> createState() => _FollowerCardState();
@@ -17,8 +19,8 @@ class _FollowerCardState extends State<FollowerCard> {
       child: Card(
         child: ListTile(
           contentPadding: const EdgeInsets.all(10),
-          leading: Image.asset('assets/icons/ic_user.png'),
-          title: const Text("Constâncio"),
+          leading: Image.network(widget.follower.photoUrl),
+          title: Text("${widget.follower.name} ${widget.follower.surname}"),
           trailing: SizedBox(
             width: 100,
             child: ElevatedButton(
