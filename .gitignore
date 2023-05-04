@@ -10,3 +10,4 @@ app/macos
 app/linux
 app/web
 app/windows
+app/coverage
