@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:switchit/app/routes.dart';
 import 'package:switchit/network/network_auth_controller.dart';
 import 'package:switchit/network/network_controller.dart';
+import 'package:switchit/provider/user_provider.dart';
 import 'package:switchit/screens/home/home_screen.dart';
 import 'package:switchit/screens/login/view/login_screen.dart';
 
@@ -15,25 +17,35 @@ Future<void> main() async {
   if (await NetworkAuthController().isUserAuthenticated()) {
     debugPrint('User is signed in!');
 
-    runApp(MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Switchit',
-        theme: ThemeData(
-          primarySwatch: colorPrimary,
-        ),
-        routes: routes,
-        home: const HomeScreen()));
+    runApp(
+      ChangeNotifierProvider(
+        create: (context) => UserProvider(),
+        child: MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'Switchit',
+            theme: ThemeData(
+              primarySwatch: colorPrimary,
+            ),
+            routes: routes,
+            home: const HomeScreen()),
+      ),
+    );
   } else {
     debugPrint('User is currently signed out!');
 
-    runApp(MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Switchit',
-      theme: ThemeData(
-        primarySwatch: colorPrimary,
+    runApp(
+      ChangeNotifierProvider(
+        create: (context) => UserProvider(),
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Switchit',
+          theme: ThemeData(
+            primarySwatch: colorPrimary,
+          ),
+          routes: routes,
+          home: const LoginScreen(),
+        ),
       ),
-      routes: routes,
-      home: const LoginScreen(),
-    ));
+    );
   }
 }

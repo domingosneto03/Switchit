@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:switchit/database/database_realm.dart';
 import 'package:switchit/screens/home/profile/items_for_trade/view_model/item_data_model.dart';
 
-import 'package:switchit/screens/home/search/view_model/user_data_model.dart';
+import 'package:switchit/models/user_data_model.dart';
 
 class TableCloudUser {
   static String name = "users";

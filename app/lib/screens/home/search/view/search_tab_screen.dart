@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:switchit/screens/home/search/view/components/body.dart';
-import 'package:switchit/screens/home/search/view_model/items_to_trade_view_model.dart';
+import 'package:switchit/models/items_to_trade_view_model.dart';
 
 class SearchTabScreen extends StatelessWidget {
   const SearchTabScreen({super.key});
