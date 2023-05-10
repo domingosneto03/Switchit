@@ -28,6 +28,7 @@ class ItemsForTradeViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+
   void filterSearchResults(String query) {
     items = originalItems
         .where((item) => item.name.toLowerCase().contains(query.toLowerCase()))

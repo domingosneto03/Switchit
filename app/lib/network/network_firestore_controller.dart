@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:switchit/database/database_realm.dart';
 import 'package:switchit/screens/home/profile/items_for_trade/view_model/item_data_model.dart';
@@ -144,6 +145,17 @@ class NetworkFirestoreController {
 
     var data = await users.doc(userDocId).collection(TableCloudItem.name).get();
 
+    var ownerData = await users.get();
+
+    String email;
+
+    for (var doc in ownerData.docs) {
+      String id = doc.id;
+      if (userDocId == id) {
+        String email = doc.get(TableCloudUser.fieldUserEmail);
+      }
+    }
+
     for (var doc in data.docs) {
       String id = doc.id;
       String name = doc.get(TableCloudItem.fieldItemName);
@@ -151,12 +163,12 @@ class NetworkFirestoreController {
       String location = doc.get(TableCloudItem.fieldItemLocation);
       bool isTraded = doc.get(TableCloudItem.fieldItemIsTraded);
       String imageUrl = doc.get(TableCloudItem.fieldItemImageUrl);
-
+      String email = "email do utilizador";
       debugPrint(
           "FirebaseFirestore (getItemsCurrentUserCloud): ItemDataModel-> name: $name, description: $description, location: $location, isTraded: $isTraded, imageUrl: $imageUrl");
 
       items.add(
-          ItemDataModel(id, name, description, location, isTraded, imageUrl));
+          ItemDataModel(id, name, description, location, isTraded, imageUrl, email));
     }
 
     debugPrint("FirebaseFirestore (getItemsCurrentUserCloud): Success");
@@ -230,4 +242,32 @@ class NetworkFirestoreController {
     }
     return itemsList;
   }
+
+  Future<UserDataModel> getUserCloud(String userDocId) async {
+    CollectionReference users =
+    FirebaseFirestore.instance.collection(TableCloudUser.name);
+
+    List<ItemDataModel> itemsList = [];
+
+    var data = await users.get();
+
+    for (var doc in data.docs) {
+      String id = doc.id;
+
+      if (userDocId == id) {
+        String name = doc.get(TableCloudUser.fieldUserName);
+        String surname = doc.get(TableCloudUser.fieldUserSurname);
+        String email = doc.get(TableCloudUser.fieldUserEmail);
+
+        var items = await getItemsUserCloud(doc.id);
+
+        debugPrint(
+            "FirebaseFirestore (getItemsCurrentUserCloud): ItemDataModel-> name: $name, surname: $surname, email: $email, items: $items");
+
+        return UserDataModel(id, name, surname, email, items);
+      }
+    }
+    return UserDataModel("", "", "surname", "email", itemsList);
+  }
+
 }

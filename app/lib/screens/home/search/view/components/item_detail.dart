@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:switchit/screens/home/profile/items_for_trade/view_model/item_data_model.dart';
+import 'package:switchit/screens/home/search/view/components/user_detail.dart';
 
 class ItemDetail extends StatelessWidget{
 
@@ -42,6 +43,12 @@ class ItemDetail extends StatelessWidget{
                           ListTile(
                             title: Text(item.name),
                             subtitle: Text(item.description),
+                          ),
+                          ListTile(
+                            title: Text(item.owner),
+                            onTap: (){
+                              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>UserDetail(email: item.owner)));
+                            },
                           ),
                         ],
                       );
