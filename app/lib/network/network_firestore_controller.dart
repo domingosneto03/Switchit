@@ -163,7 +163,7 @@ class NetworkFirestoreController {
       String location = doc.get(TableCloudItem.fieldItemLocation);
       bool isTraded = doc.get(TableCloudItem.fieldItemIsTraded);
       String imageUrl = doc.get(TableCloudItem.fieldItemImageUrl);
-      String email = "email do utilizador";
+      String email = "utilizador";
       debugPrint(
           "FirebaseFirestore (getItemsCurrentUserCloud): ItemDataModel-> name: $name, description: $description, location: $location, isTraded: $isTraded, imageUrl: $imageUrl");
 
