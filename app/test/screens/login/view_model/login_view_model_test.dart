@@ -44,12 +44,12 @@ void main() {
     });
     test("-> Testing invalid password", () {
       viewModel.email = email;
-      viewModel.password = "pass";
+      viewModel.password = "";
 
       viewModel.login();
 
       expect(StatusView.messageToShow, viewModel.status);
-      expect("Wrong password.", viewModel.message);
+      expect("Please enter a password.", viewModel.message);
     });
   });
 
