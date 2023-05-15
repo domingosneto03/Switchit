@@ -6,6 +6,12 @@ import 'package:switchit/util/ui/components/textfield_default.dart';
 import 'package:switchit/screens/signup/view/signup_screen.dart';
 import 'package:switchit/screens/forgot_password/view/forgot_password_screen.dart';
 
+final Map<String, WidgetBuilder> routes = {
+  LoginScreen.routeName: (context) => const LoginScreen(),
+  SignupScreen.routeName: (context) => const SignupScreen(),
+  ForgotPasswordScreen.routeName: (context) => const ForgotPasswordScreen()
+};
+
 void main() {
   testWidgets('Checking normal text', (tester) async {
     await tester.pumpWidget(const MaterialApp(home: LoginScreen()));
@@ -90,18 +96,19 @@ void main() {
     );
 
     await tester.enterText(emailField, "test@test.com");
-    await tester.enterText(passwordField, "pass123");
+    await tester.enterText(passwordField, "");
 
     await tester.tap(find.byType(ButtonDefault));
 
     await tester.pump();
 
     expect(find.text('Alert'), findsOneWidget);
-    expect(find.text('Wrong password.'), findsOneWidget);
+    expect(find.text('Please enter a password.'), findsOneWidget);
   });
   testWidgets('Checking Register Now navigates to signup screen',
       (tester) async {
-    await tester.pumpWidget(const MaterialApp(home: LoginScreen()));
+    await tester
+        .pumpWidget(MaterialApp(home: const LoginScreen(), routes: routes));
 
     final onTap = find.text('Register now');
     await tester.tap(onTap);
@@ -112,7 +119,9 @@ void main() {
 
   testWidgets('Checking Forgot Password navigates to ForgotPasswordScreen',
       (tester) async {
-    await tester.pumpWidget(const MaterialApp(home: LoginScreen()));
+    await tester.pumpWidget(
+      MaterialApp(home: const LoginScreen(), routes: routes),
+    );
 
     final onTap = find.text('Forgot Password?');
     await tester.tap(onTap);
