@@ -13,7 +13,7 @@ Future<void> main() {
       JsonReporter(path: './report.json')
     ]
     ..stepDefinitions = [
-      TapWidget(),
+      Given__the__Search__page(),
 
     ]
     ..restartAppBetweenScenarios = true
