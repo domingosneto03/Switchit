@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:provider/provider.dart';
 import 'package:switchit/screens/home/profile/items_for_trade/view_model/item_data_model.dart';
+import 'package:switchit/screens/home/search/view/components/item_detail.dart';
+import 'package:switchit/screens/home/search/view/components/user_detail.dart';
 import 'package:switchit/screens/home/search/view_model/items_to_trade_view_model.dart';
 import 'package:switchit/util/status_view.dart';
 import 'package:switchit/util/ui/components/default_dialog.dart';
@@ -88,6 +90,9 @@ class BodyState extends State<Body> {
                                 ListTile(
                                   title: Text(item.name),
                                   subtitle: Text(item.description),
+                                  onTap: (){
+                                    Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ItemDetail(item: item)));
+                                  },
                                 ),
                               ],
                             );
@@ -139,6 +144,10 @@ class CustomSearchDelegate extends SearchDelegate {
 
   bool recentFlag = true;
 
+  dynamic _result;
+
+  bool isResultItem = false;
+
   List<dynamic> recent = [];
 
   List<ItemDataModel> suggestionsList=[];
@@ -171,24 +180,20 @@ class CustomSearchDelegate extends SearchDelegate {
   @override
   Widget buildResults(BuildContext context) {
 
-    return Scaffold(
-      body: Column(
-        children: [
-          const SizedBox(
-            height: 10,
-          ),
-          Expanded(
-              flex: 1,
-              child: (() {
-                suggestionsList = viewModel.items.where((p) => p.name.toLowerCase().contains(query.toLowerCase())).toList();
-                     if (suggestionsList.isEmpty) {
-                      return const Center(child: Text("No Results Found."));
-                    } else {
+    if(isResultItem) {
+      return Scaffold(
+          body: Column(
+            children: [
+              const SizedBox(
+                height: 10,
+              ),
+              Expanded(
+                  flex: 1,
+                  child: (() {
                       return ListView.builder(
-                          itemCount: suggestionsList.length,
+                          itemCount: 1,
                           itemBuilder: (context, index) {
-                            final item = suggestionsList[index];
-
+                            final item = _result;
                             return Column(
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: <Widget>[
@@ -211,14 +216,75 @@ class CustomSearchDelegate extends SearchDelegate {
                                   title: Text(item.name),
                                   subtitle: Text(item.description),
                                 ),
+                                ListTile(
+                                  title: Text(item.owner),
+                                  onTap: (){
+                                    Navigator.of(context).push(MaterialPageRoute(builder: (context)=>UserDetail(email: item.owner)));
+                                  },
+                                ),
                               ],
                             );
                           });
-                    }
-                  }())),
-        ],
-      ),
-    );
+                    }()))
+            ],
+          ),
+      );
+    }
+    else {
+      return Scaffold(
+        body: Column(
+          children: [
+            const SizedBox(
+              height: 10,
+            ),
+            Expanded(
+                flex: 1,
+                child: (() {
+                  suggestionsList = viewModel.items.where((p) =>
+                      p.name.toLowerCase().contains(query.toLowerCase()))
+                      .toList();
+                  if (suggestionsList.isEmpty) {
+                    return const Center(child: Text("No Results Found."));
+                  } else {
+                    return ListView.builder(
+                        itemCount: suggestionsList.length,
+                        itemBuilder: (context, index) {
+                          final item = suggestionsList[index];
+
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: <Widget>[
+                              ClipRRect(
+                                borderRadius: const BorderRadius.only(
+                                  topLeft: Radius.circular(8.0),
+                                  topRight: Radius.circular(8.0),
+                                ),
+                                child: Image.network(item.imageUrl,
+                                    height: 250,
+                                    fit: BoxFit.cover, loadingBuilder:
+                                        (context, child, loadingProgress) {
+                                      if (loadingProgress != null) {
+                                        return const CircularProgressIndicator();
+                                      }
+                                      return child;
+                                    }),
+                              ),
+                              ListTile(
+                                title: Text(item.name),
+                                subtitle: Text(item.description),
+                                onTap: (){
+                                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ItemDetail(item: item)));
+                                },
+                              ),
+                            ],
+                          );
+                        });
+                  }
+                }())),
+          ],
+        ),
+      );
+    }
 
   }
 
@@ -242,6 +308,8 @@ class CustomSearchDelegate extends SearchDelegate {
               recent.insert(0, result);
               recentFlag = false;
               showResults(context);
+              _result = result;
+              isResultItem = true;
             }
           },
               child: ListTile(
@@ -272,6 +340,7 @@ class CustomSearchDelegate extends SearchDelegate {
       recent.insert(0, query);
     }
     recentFlag = true;
+    isResultItem = false;
   }
 
 }
