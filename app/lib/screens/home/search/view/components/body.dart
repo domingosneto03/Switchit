@@ -5,6 +5,7 @@ import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:provider/provider.dart';
 import 'package:switchit/screens/home/profile/items_for_trade/view_model/item_data_model.dart';
 import 'package:switchit/screens/home/search/view/components/item_detail.dart';
+import 'package:switchit/screens/home/search/view/components/user_detail.dart';
 import 'package:switchit/screens/home/search/view_model/items_to_trade_view_model.dart';
 import 'package:switchit/util/status_view.dart';
 import 'package:switchit/util/ui/components/default_dialog.dart';
@@ -215,6 +216,12 @@ class CustomSearchDelegate extends SearchDelegate {
                                   title: Text(item.name),
                                   subtitle: Text(item.description),
                                 ),
+                                ListTile(
+                                  title: Text(item.owner),
+                                  onTap: (){
+                                    Navigator.of(context).push(MaterialPageRoute(builder: (context)=>UserDetail(email: item.owner)));
+                                  },
+                                ),
                               ],
                             );
                           });
@@ -265,6 +272,9 @@ class CustomSearchDelegate extends SearchDelegate {
                               ListTile(
                                 title: Text(item.name),
                                 subtitle: Text(item.description),
+                                onTap: (){
+                                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ItemDetail(item: item)));
+                                },
                               ),
                             ],
                           );
