@@ -45,9 +45,9 @@ class ItemDetail extends StatelessWidget{
                             subtitle: Text(item.description),
                           ),
                           ListTile(
-                            title: Text(item.owner),
+                            title: Text(item.ownerEmail),
                             onTap: (){
-                              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>UserDetail(email: item.owner)));
+                              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>UserDetail(ownerEmail: item.ownerEmail)));
                             },
                           ),
                         ],

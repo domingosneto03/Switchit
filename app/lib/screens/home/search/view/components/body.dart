@@ -219,7 +219,7 @@ class CustomSearchDelegate extends SearchDelegate {
                                 ListTile(
                                   title: Text(item.owner),
                                   onTap: (){
-                                    Navigator.of(context).push(MaterialPageRoute(builder: (context)=>UserDetail(email: item.owner)));
+                                    Navigator.of(context).push(MaterialPageRoute(builder: (context)=>UserDetail(ownerEmail: item.ownerEmail)));
                                   },
                                 ),
                               ],

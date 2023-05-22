@@ -4,9 +4,9 @@ import 'package:switchit/screens/home/search/view_model/user_data_model.dart';
 
 class UserDetail extends StatelessWidget{
 
-  String email;
+  String ownerEmail;
 
-  UserDetail({Key? key, required this.email}) : super(key: key);
+  UserDetail({Key? key, required this.ownerEmail}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
