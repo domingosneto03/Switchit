@@ -20,7 +20,8 @@ class TableCloudItem {
   static String fieldItemDescription = "description";
   static String fieldItemLocation = "location";
   static String fieldItemIsTraded = "traded";
-  static String fieldItemOwner = "ownerEmail";
+  static String fieldItemOwnerDocId = "ownerDocId";
+  static String fieldItemOwnerUsername = "ownerUsername";
   static String fieldItemImageUrl = "imageUrl";
 }
 
@@ -126,7 +127,8 @@ class NetworkFirestoreController {
       TableCloudItem.fieldItemLocation: location,
       TableCloudItem.fieldItemIsTraded: false,
       TableCloudItem.fieldItemImageUrl: imageUrl,
-      TableCloudItem.fieldItemOwner: await DatabaseRealm().getUserEmail()
+      TableCloudItem.fieldItemOwnerDocId: await DatabaseRealm().getUserDocId(),
+      TableCloudItem.fieldItemOwnerUsername: await DatabaseRealm().getUserName()
     }).then((value) {
       debugPrint("FirebaseFirestore (addItemToCloud): Item Added");
       isAddedToCloud = true;
@@ -154,12 +156,13 @@ class NetworkFirestoreController {
       String location = doc.get(TableCloudItem.fieldItemLocation);
       bool isTraded = doc.get(TableCloudItem.fieldItemIsTraded);
       String imageUrl = doc.get(TableCloudItem.fieldItemImageUrl);
-      String ownerEmail = doc.get(TableCloudItem.fieldItemOwner);
+      String ownerUsername = doc.get(TableCloudItem.fieldItemOwnerUsername);
+      String ownerDocId = doc.get(TableCloudItem.fieldItemOwnerDocId);
       debugPrint(
           "FirebaseFirestore (getItemsCurrentUserCloud): ItemDataModel-> name: $name, description: $description, location: $location, isTraded: $isTraded, imageUrl: $imageUrl");
 
       items.add(
-          ItemDataModel(id, name, description, location, isTraded, imageUrl, ownerEmail)
+          ItemDataModel(id, name, description, location, isTraded, imageUrl, ownerDocId, ownerUsername)
       );
     }
 

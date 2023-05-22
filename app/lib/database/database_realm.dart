@@ -34,6 +34,12 @@ class DatabaseRealm {
     return user.docId;
   }
 
+  Future<String?> getUserName() async {
+    var data = realm.all<UserRealm>();
+    UserRealm user = data[0];
+    return user.name;
+  }
+
   Future setIsRememberedUserDetails(bool isRememberedUserDetails) async {
     var data = realm.all<UserRealm>();
     UserRealm user = data[0];
@@ -55,4 +61,5 @@ class DatabaseRealm {
     var config = Configuration.local([UserRealm.schema]);
     realm = Realm(config);
   }
+
 }
