@@ -26,6 +26,12 @@ class DatabaseRealm {
     return user.email;
   }
 
+  Future<String?> getUserSurname() async {
+    var data = realm.all<UserRealm>();
+    UserRealm user = data[0];
+    return user.surname;
+  }
+
   Future<String?> getUserDocId() async {
     var data = realm.all<UserRealm>();
     UserRealm user = data[0];
@@ -47,6 +53,12 @@ class DatabaseRealm {
     var data = realm.all<UserRealm>();
     UserRealm user = data[0];
     return user.isRememberedDetails;
+  }
+
+  void clearDatabase() async {
+    realm.write(() {
+      realm.deleteAll<UserRealm>();
+    });
   }
 
   DatabaseRealm._internal() {

@@ -95,6 +95,7 @@ class NetworkAuthController {
   Future<bool> logout() async {
     try {
       await FirebaseAuth.instance.signOut();
+      DatabaseRealm().clearDatabase();
       debugPrint('FirebaseAuth (logout): success');
 
       return true;
@@ -134,6 +135,8 @@ class NetworkAuthController {
       if (!isRemovedFromCloud) {
         return false;
       }
+
+      DatabaseRealm().clearDatabase();
 
       return true;
     } on FirebaseAuthException catch (e) {
