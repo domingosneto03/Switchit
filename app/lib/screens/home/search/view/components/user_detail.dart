@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:switchit/screens/home/profile/items_for_trade/view_model/item_data_model.dart';
 import 'package:switchit/screens/home/search/view_model/user_data_model.dart';
 import 'package:switchit/network/network_firestore_controller.dart';
-import 'package:switchit/screens/home/search/view_model/user_view_model.dart';
 
 class UserDetail extends StatelessWidget{
 
@@ -18,45 +17,54 @@ class UserDetail extends StatelessWidget{
         future: NetworkFirestoreController().getUserCloud(ownerDocId),
         builder: (BuildContext context, AsyncSnapshot<UserDataModel> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            // Display a loading indicator while fetching the user data
             return const Center(
               child: CircularProgressIndicator(),
             );
           } else if (snapshot.hasError) {
-            // Display an error message if an error occurred
             return Center(
               child: Text('Error: ${snapshot.error}'),
             );
           } else if (snapshot.hasData) {
-            // User data has been successfully fetched
             UserDataModel user = snapshot.data!;
-            return Column(
-              children: [
-                const SizedBox(
-                  height: 10,
-                ),
-                Expanded(
-                  flex: 1,
-                  child: ListView.builder(
-                    itemCount: 1,
-                    itemBuilder: (context, index) {
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
+            return Scaffold(
+              appBar: AppBar(
+                title: const Text('User Details'),
+              ),
+              body: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Row(
+                  children: [
+                    Container(
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.blueGrey,
+                      ),
+                      height: 100,
+                      width: 100,
+                      margin: const EdgeInsets.fromLTRB(0, 0, 20, 0),
+                      child: const Icon(
+                        Icons.person,
+                        color: Colors.black,
+                        size: 100,
+                      ),
+                    ),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          ClipRRect(
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(8.0),
-                              topRight: Radius.circular(8.0),
-                            ),
-                            // Use the user data to display information
-                            child: Text('Name: ${user.name}'),
+                          ListTile(
+                            title: Text(user.name),
+                            subtitle: Text(user.surname),
+                          ),
+                          ListTile(
+                            title: Text(user.email),
                           ),
                         ],
-                      );
-                    },
-                  ),
+                      ),
+                    ),
+                  ],
                 ),
-              ],
+              ),
             );
           } else {
             // Handle the case when snapshot does not have data (null)
