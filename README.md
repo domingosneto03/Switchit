@@ -20,7 +20,7 @@ You can find here details about the app, from a high-level vision to low-level i
   * [Realm](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T3/blob/main/docs/ArchitectureAndDesign.md#realm)
   * [Vertical prototype](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T3/blob/main/docs/ArchitectureAndDesign.md#vertical-prototype)
 * [Implementation]
-* [Test] (https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T3/blob/main/demo.md)
+* [Test](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T3/blob/main/demo.md)
 * [Configuration and change management]
 * [Project management](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T3/blob/main/docs/ProjectManagement.md)
 
