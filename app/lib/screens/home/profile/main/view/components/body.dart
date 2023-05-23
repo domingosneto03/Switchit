@@ -60,10 +60,7 @@ class _BodyState extends State<Body> {
                       width: 150,
                       height: 90,
                       child: const Text(
-                        "Maecenas laoreet arcu tortor, sit amet faucibus nulla tempus eget."
-                        "Suspendisse at erat in neque tincidunt malesuada."
-                        "Quisque nisl arcu, eleifend at commodo non, sollicitudin non nisi. "
-                        "Ut tempus, magna vel faucibus dapibus.",
+                        "Passionate trader with a keen eye for market trends, maximizing profits one trade at a time. 📈💰",
                         style: TextStyle(fontSize: 11, color: Colors.black),
                       ),
                     )
