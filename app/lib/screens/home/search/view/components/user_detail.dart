@@ -32,35 +32,55 @@ class UserDetail extends StatelessWidget{
               ),
               body: Padding(
                 padding: const EdgeInsets.all(20.0),
-                child: Row(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.blueGrey,
-                      ),
-                      height: 100,
-                      width: 100,
-                      margin: const EdgeInsets.fromLTRB(0, 0, 20, 0),
-                      child: const Icon(
-                        Icons.person,
-                        color: Colors.black,
-                        size: 100,
-                      ),
-                    ),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          ListTile(
-                            title: Text(user.name),
-                            subtitle: Text(user.surname),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      textBaseline: TextBaseline.alphabetic,
+                      children: [
+                        Transform.translate(
+                          offset: const Offset(5, 25),
+                          child: Container(
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.blueGrey,
+                            ),
+                            height: 100,
+                            width: 100,
+                            margin: const EdgeInsets.fromLTRB(0, 0, 20, 0),
+                            child: const Icon(
+                              Icons.person,
+                              color: Colors.black,
+                              size: 100,
+                            ),
                           ),
-                          ListTile(
-                            title: Text(user.email),
+                        ),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                margin: const EdgeInsets.fromLTRB(0, 50, 0, 0),
+                                width: 150,
+                                height: 30,
+                                child: Text(
+                                  user.name,
+                                  style: const TextStyle(fontSize: 20, color: Colors.black),
+                                ),
+                              ),
+                              Container(
+                                margin: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                                height: 90,
+                                child: Text(
+                                  user.email,
+                                  style: const TextStyle(fontSize: 11, color: Colors.black),
+                                ),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
