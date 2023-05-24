@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:switchit/database/database_realm.dart';
 import 'package:switchit/screens/home/profile/items_for_trade/view_model/item_data_model.dart';
@@ -20,6 +21,8 @@ class TableCloudItem {
   static String fieldItemDescription = "description";
   static String fieldItemLocation = "location";
   static String fieldItemIsTraded = "traded";
+  static String fieldItemOwnerDocId = "ownerDocId";
+  static String fieldItemOwnerUsername = "ownerUsername";
   static String fieldItemImageUrl = "imageUrl";
 }
 
@@ -154,7 +157,9 @@ class NetworkFirestoreController {
       TableCloudItem.fieldItemDescription: description,
       TableCloudItem.fieldItemLocation: location,
       TableCloudItem.fieldItemIsTraded: false,
-      TableCloudItem.fieldItemImageUrl: imageUrl
+      TableCloudItem.fieldItemImageUrl: imageUrl,
+      TableCloudItem.fieldItemOwnerDocId: await DatabaseRealm().getUserDocId(),
+      TableCloudItem.fieldItemOwnerUsername: await DatabaseRealm().getUserName()
     }).then((value) {
       debugPrint("FirebaseFirestore (addItemToCloud): Item Added");
       isAddedToCloud = true;
@@ -182,12 +187,14 @@ class NetworkFirestoreController {
       String location = doc.get(TableCloudItem.fieldItemLocation);
       bool isTraded = doc.get(TableCloudItem.fieldItemIsTraded);
       String imageUrl = doc.get(TableCloudItem.fieldItemImageUrl);
-
+      String ownerUsername = doc.get(TableCloudItem.fieldItemOwnerUsername);
+      String ownerDocId = doc.get(TableCloudItem.fieldItemOwnerDocId);
       debugPrint(
           "FirebaseFirestore (getItemsCurrentUserCloud): ItemDataModel-> name: $name, description: $description, location: $location, isTraded: $isTraded, imageUrl: $imageUrl");
 
       items.add(
-          ItemDataModel(id, name, description, location, isTraded, imageUrl));
+          ItemDataModel(id, name, description, location, isTraded, imageUrl, ownerDocId, ownerUsername)
+      );
     }
 
     debugPrint("FirebaseFirestore (getItemsCurrentUserCloud): Success");
@@ -269,6 +276,7 @@ class NetworkFirestoreController {
     return itemsList;
   }
 
+<<<<<<< HEAD
   Future<List<UserDataModel>> getFollowersUserCloud(String? docUserId) async {
     CollectionReference followersCollection = FirebaseFirestore.instance.collection('followers');
     List<UserDataModel> followers = [];
@@ -303,4 +311,32 @@ class NetworkFirestoreController {
     }
     return followings;
   }
+
+  Future<UserDataModel> getUserCloud(String userDocId) async {
+    CollectionReference users =
+    FirebaseFirestore.instance.collection(TableCloudUser.name);
+
+    List<ItemDataModel> itemsList = [];
+
+    var data = await users.get();
+
+    for (var doc in data.docs) {
+      String id = doc.id;
+
+      if (userDocId == id) {
+        String name = doc.get(TableCloudUser.fieldUserName);
+        String surname = doc.get(TableCloudUser.fieldUserSurname);
+        String email = doc.get(TableCloudUser.fieldUserEmail);
+
+        var items = await getItemsUserCloud(doc.id);
+
+        debugPrint(
+            "FirebaseFirestore (getItemsCurrentUserCloud): ItemDataModel-> name: $name, surname: $surname, email: $email, items: $items");
+
+        return UserDataModel(id, name, surname, email, items);
+      }
+    }
+    return UserDataModel("", "", "surname", "email", itemsList);
+  }
+
 }
