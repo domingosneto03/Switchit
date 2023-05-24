@@ -3,10 +3,10 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:provider/provider.dart';
+import 'package:switchit/models/items_to_trade_view_model.dart';
 import 'package:switchit/screens/home/profile/items_for_trade/view_model/item_data_model.dart';
 import 'package:switchit/screens/home/search/view/components/item_detail.dart';
 import 'package:switchit/screens/home/search/view/components/user_detail.dart';
-import 'package:switchit/screens/home/search/view_model/items_to_trade_view_model.dart';
 import 'package:switchit/util/status_view.dart';
 import 'package:switchit/util/ui/components/default_dialog.dart';
 

@@ -1,6 +1,5 @@
 import 'package:realm/realm.dart';
 import 'package:switchit/database/user_realm.dart';
-import 'package:switchit/screens/home/search/view_model/user_data_model.dart';
 
 class DatabaseRealm {
   static final DatabaseRealm _singleton = DatabaseRealm._internal();

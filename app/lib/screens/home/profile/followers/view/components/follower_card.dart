@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:switchit/models/user_data_model.dart';
+import 'package:switchit/network/network_firestore_controller.dart';
 
 class FollowerCard extends StatefulWidget {
-  const FollowerCard({Key? key}) : super(key: key);
+  final UserDataModel follower;
+  const FollowerCard({required this.follower, Key? key}) : super(key: key);
 
   @override
   State<FollowerCard> createState() => _FollowerCardState();
@@ -10,6 +13,17 @@ class FollowerCard extends StatefulWidget {
 class _FollowerCardState extends State<FollowerCard> {
   bool pressed = false;
 
+  void followUser() {
+    if (pressed) {
+      NetworkFirestoreController().removeFollowerFromCurrentUser(widget.follower.id);
+    } else {
+      NetworkFirestoreController().addFollowerToCurrentUser(widget.follower.id);
+    }
+    setState(() {
+      pressed = !pressed;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -17,8 +31,8 @@ class _FollowerCardState extends State<FollowerCard> {
       child: Card(
         child: ListTile(
           contentPadding: const EdgeInsets.all(10),
-          leading: Image.asset('assets/icons/ic_user.png'),
-          title: const Text("Constâncio"),
+          leading: Image.network(widget.follower.photoUrl),
+          title: Text("${widget.follower.name} ${widget.follower.surname}"),
           trailing: SizedBox(
             width: 100,
             child: ElevatedButton(
@@ -36,12 +50,8 @@ class _FollowerCardState extends State<FollowerCard> {
                           const BorderSide(width: 2, color: Colors.deepPurple))
                       : MaterialStateProperty.all(const BorderSide(
                           width: 0, color: Colors.transparent))),
+              onPressed: followUser,
               child: pressed ? const Text("Following") : const Text("Follow"),
-              onPressed: () {
-                setState(() {
-                  pressed = !pressed;
-                });
-              },
             ),
           ),
         ),

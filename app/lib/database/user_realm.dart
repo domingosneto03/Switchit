@@ -10,4 +10,5 @@ class _UserRealm {
   late String email;
   late String docId;
   bool isRememberedDetails = false;
+  List<String> followedUserIds = [];
 }
