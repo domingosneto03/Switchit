@@ -20,17 +20,24 @@ You can find here details about the app, from a high-level vision to low-level i
   * [Realm](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T3/blob/main/docs/ArchitectureAndDesign.md#realm)
   * [Vertical prototype](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T3/blob/main/docs/ArchitectureAndDesign.md#vertical-prototype)
 * [Implementation]
-* [Test]
+* [Test](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T3/blob/main/demo.md)
 * [Configuration and change management]
 * [Project management](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T3/blob/main/docs/ProjectManagement.md)
+
+### Built in: 
+  * Flutter
+  * Dart
+  * Firebase
 
 ### Contributing
 
 So far, contributions are exclusively made by the initial team, but we hope to open them to the community, in all areas and topics: requirements, technologies, development, experimentation, testing, etc.
 
-Please contact us!
+### Contact Us
 
-Thank you!
+If you have any questions or suggestions, please feel free to reach out to us. You can contact the project maintainers via opening an issue in our GitHub repository [here](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T3/issues).
+
+We welcome any feedback and appreciate your interest in our project.
 
 ### Credits
 * Artur Telo Luís

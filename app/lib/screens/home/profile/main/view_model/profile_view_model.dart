@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:switchit/database/database_realm.dart';
 import 'package:switchit/network/network_auth_controller.dart';
 import 'package:switchit/util/status_view.dart';
 
 class ProfileViewModel extends ChangeNotifier {
   StatusView status = StatusView.intial;
   String message = "";
+
+  String username = "";
+
+  Future<void> getSurname() async {
+    username = await DatabaseRealm().getUserSurname() ?? "";
+
+    notifyListeners();
+  }
 
   Future<void> logout() async {
     status = StatusView.inProgress;

@@ -24,6 +24,8 @@ class _BodyState extends State<Body> {
   Widget build(BuildContext context) {
     ProfileViewModel viewModel = context.watch<ProfileViewModel>();
 
+    viewModel.getSurname();
+
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -49,18 +51,16 @@ class _BodyState extends State<Body> {
                       margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
                       width: 150,
                       height: 30,
-                      child: const Text("@example_user",
-                          style: TextStyle(fontSize: 20, color: Colors.black)),
+                      child: Text(viewModel.username,
+                          style: const TextStyle(
+                              fontSize: 20, color: Colors.black)),
                     ),
                     Container(
                       margin: const EdgeInsets.fromLTRB(10, 0, 0, 10),
                       width: 150,
                       height: 90,
                       child: const Text(
-                        "Maecenas laoreet arcu tortor, sit amet faucibus nulla tempus eget."
-                        "Suspendisse at erat in neque tincidunt malesuada."
-                        "Quisque nisl arcu, eleifend at commodo non, sollicitudin non nisi. "
-                        "Ut tempus, magna vel faucibus dapibus.",
+                        "Passionate trader with a keen eye for market trends, maximizing profits one trade at a time. 📈💰",
                         style: TextStyle(fontSize: 11, color: Colors.black),
                       ),
                     )
