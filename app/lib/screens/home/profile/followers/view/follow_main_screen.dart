@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:switchit/database/database_realm.dart';
@@ -17,13 +16,13 @@ class FollowMainScreen extends StatefulWidget {
 }
 
 class _FollowMainScreenState extends State<FollowMainScreen> {
-  bool _isLoading = false;
 
   NetworkFirestoreController networkFirestoreController =
       NetworkFirestoreController();
 
   List<UserDataModel> _followers = [];
   List<UserDataModel> _following = [];
+  bool isFollowing = false;
 
   @override
   void initState() {
@@ -76,11 +75,9 @@ class _FollowMainScreenState extends State<FollowMainScreen> {
             children: [
               FollowersTab(
                 followers: _followers,
-                isLoading: _isLoading,
               ),
               FollowingTab(
                 following: _following,
-                isLoading: _isLoading,
               ),
             ],
           ),
