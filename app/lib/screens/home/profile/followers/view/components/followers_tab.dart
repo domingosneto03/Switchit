@@ -5,12 +5,10 @@ import 'package:switchit/models/user_data_model.dart';
 
 class FollowersTab extends StatefulWidget {
   final List<UserDataModel> followers;
-  final bool isLoading;
 
   const FollowersTab({
     Key? key,
     required this.followers,
-    required this.isLoading,
   }) : super(key: key);
 
   @override
@@ -20,21 +18,11 @@ class FollowersTab extends StatefulWidget {
 class _FollowersTabState extends State<FollowersTab> {
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        ListView.builder(
-          itemCount: widget.followers.length,
-          itemBuilder: (BuildContext context, int index) {
-            return FollowerCard(follower: widget.followers[index]);
-          },
-        ),
-        Visibility(
-          visible: widget.isLoading,
-          child: const Center(
-            child: CircularProgressIndicator(),
-          ),
-        )
-      ],
+    return ListView.builder(
+      itemCount: widget.followers.length,
+      itemBuilder: (BuildContext context, int index) {
+        return FollowerCard(follower: widget.followers[index]);
+      },
     );
   }
 }
