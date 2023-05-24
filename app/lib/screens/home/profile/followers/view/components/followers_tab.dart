@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:switchit/screens/home/profile/followers/view/components/follower_card.dart';
 
-import '../../../../../../models/user_data_model.dart';
+import 'package:switchit/models/user_data_model.dart';
 
 class FollowersTab extends StatefulWidget {
-  const FollowersTab({required this.followers});
   final List<UserDataModel> followers;
-
+  const FollowersTab({super.key, required this.followers});
 
   @override
   State<FollowersTab> createState() => _FollowersTabState();

@@ -1,13 +1,15 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:switchit/database/database_realm.dart';
 import 'package:switchit/models/user_data_model.dart';
+import 'package:switchit/network/network_firestore_controller.dart';
 import 'package:switchit/screens/home/profile/followers/view/components/followers_tab.dart';
 import 'package:switchit/screens/home/profile/followers/view/components/following_tab.dart';
-import '../../../../../provider/user_provider.dart';
+
 
 class FollowMainScreen extends StatefulWidget {
-  const FollowMainScreen({super.key});
+  const FollowMainScreen({Key? key}) : super(key: key);
 
   static String routeName = "/followers_screen";
 
@@ -16,18 +18,45 @@ class FollowMainScreen extends StatefulWidget {
 }
 
 class _FollowMainScreenState extends State<FollowMainScreen> {
+  NetworkFirestoreController networkFirestoreController =
+    NetworkFirestoreController();
+
+  List<UserDataModel> _followers = [];
+  List<UserDataModel> _following = [];
+
+  @override
+  void initState() {
+    super.initState();
+    networkFirestoreController = NetworkFirestoreController();
+    fetchFollowers();
+    fetchFollowing();
+  }
+
+  Future<void> fetchFollowers() async {
+    var userDocId = await DatabaseRealm().getUserDocId();
+    print('userDocId: $userDocId');
+
+    List<UserDataModel> followers =
+      await networkFirestoreController.getFollowersUserCloud(userDocId);
+
+    setState(() {
+      _followers = followers;
+    });
+  }
+
+  Future<void> fetchFollowing() async {
+    var userDocId = await DatabaseRealm().getUserDocId();
+
+    List<UserDataModel> following =
+      await networkFirestoreController.getFollowingsUserCloud(userDocId);
+
+    setState(() {
+      _following = following;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    UserProvider userProvider = Provider.of<UserProvider>(context, listen: false);
-    UserDataModel currentUser = userProvider.currentUser;
-
-    FirebaseFirestore firestore = FirebaseFirestore.instance;
-    QuerySnapshot querySnapshot = await firestore
-      .collection('followers')
-      .document(currentUser.id)
-      .collection('userFollowers')
-      .getDocuments();
 
     return Scaffold(
       body: DefaultTabController(
@@ -40,12 +69,12 @@ class _FollowMainScreenState extends State<FollowMainScreen> {
                 Tab(text: "Following"),
               ],
             ),
-            title: const Text("Followers"),
+            title: const Text("Followers/Following"),
           ),
-          body: const TabBarView(
+          body: TabBarView(
             children: [
-              FollowersTab(),
-              FollowingTab(),
+              FollowersTab(followers: _followers),
+              FollowingTab(following: _following),
             ],
           ),
         ),

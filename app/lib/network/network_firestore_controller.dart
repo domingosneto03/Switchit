@@ -90,6 +90,36 @@ class NetworkFirestoreController {
     return success;
   }
 
+  Future<UserDataModel?> getUserFromCloudId(String userId) async {
+    CollectionReference users =
+        FirebaseFirestore.instance.collection(TableCloudUser.name);
+
+    try {
+      final userDoc = await users.doc(userId).get();
+      if (userDoc.exists) {
+        String name = userDoc.get(TableCloudUser.fieldUserName);
+        String surname = userDoc.get(TableCloudUser.fieldUserSurname);
+        String email = userDoc.get(TableCloudUser.fieldUserEmail);
+        String photoUrl = userDoc.get(TableCloudUser.fieldUserPhotoUrl);
+        List<ItemDataModel> items = await getItemsUserCloud(userDoc.id);
+
+        return UserDataModel(
+          id: userId,
+          name: name,
+          surname: surname,
+          email: email,
+          photoUrl: photoUrl,
+          items: items,
+        );
+      } else {
+        return null; // User document not found
+      }
+    } catch (error) {
+      debugPrint('FirebaseFirestore (getUserFromCloud): Failed to get user: $error');
+      return null; // Error occurred while fetching user
+    }
+  }
+
   Future<bool> removeUserFromCloud(String userId) async {
     CollectionReference users =
         FirebaseFirestore.instance.collection(TableCloudUser.name);
@@ -237,5 +267,40 @@ class NetworkFirestoreController {
       itemsList.addAll(user.items);
     }
     return itemsList;
+  }
+
+  Future<List<UserDataModel>> getFollowersUserCloud(String? docUserId) async {
+    CollectionReference followersCollection = FirebaseFirestore.instance.collection('followers');
+    List<UserDataModel> followers = [];
+
+    QuerySnapshot followerDocs = await followersCollection
+      .doc(docUserId!)
+      .collection('userFollowers')
+      .get();
+
+    for (var doc in followerDocs.docs) {
+      String followerId = doc.id;
+      UserDataModel? follower = await getUserFromCloudId(followerId);
+      followers.add(follower!);
+    }
+    return followers;
+  }
+
+  Future<List<UserDataModel>> getFollowingsUserCloud(String? docUserId) async {
+    CollectionReference followingCollection =
+        FirebaseFirestore.instance.collection('following');
+    List<UserDataModel> followings = [];
+
+    QuerySnapshot followingDocs = await followingCollection
+      .doc(docUserId!)
+      .collection('userFollowing')
+      .get();
+
+    for (var doc in followingDocs.docs) {
+      String followingId = doc.id;
+      UserDataModel? following = await getUserFromCloudId(followingId);
+      followings.add(following!);
+    }
+    return followings;
   }
 }
