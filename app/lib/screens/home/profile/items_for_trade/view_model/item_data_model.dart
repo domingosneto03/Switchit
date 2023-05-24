@@ -1,3 +1,5 @@
+import 'package:switchit/screens/home/search/view_model/user_data_model.dart';
+
 class ItemDataModel {
   String id = "";
   String name = "";
@@ -5,8 +7,9 @@ class ItemDataModel {
   String location = "";
   bool traded = false;
   String imageUrl = "";
-  String owner;
+  String ownerDocId = "";
+  String ownerUsername = "";
 
   ItemDataModel(this.id, this.name, this.description, this.location,
-      this.traded, this.imageUrl, this.owner);
+      this.traded, this.imageUrl, this.ownerDocId, this.ownerUsername);
 }

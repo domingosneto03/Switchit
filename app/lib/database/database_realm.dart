@@ -1,5 +1,6 @@
 import 'package:realm/realm.dart';
 import 'package:switchit/database/user_realm.dart';
+import 'package:switchit/screens/home/search/view_model/user_data_model.dart';
 
 class DatabaseRealm {
   static final DatabaseRealm _singleton = DatabaseRealm._internal();
@@ -20,6 +21,7 @@ class DatabaseRealm {
     });
   }
 
+
   Future<String?> getUserEmail() async {
     var data = realm.all<UserRealm>();
     UserRealm user = data[0];
@@ -36,6 +38,12 @@ class DatabaseRealm {
     var data = realm.all<UserRealm>();
     UserRealm user = data[0];
     return user.docId;
+  }
+
+  Future<String?> getUserName() async {
+    var data = realm.all<UserRealm>();
+    UserRealm user = data[0];
+    return user.name;
   }
 
   Future setIsRememberedUserDetails(bool isRememberedUserDetails) async {
@@ -65,4 +73,5 @@ class DatabaseRealm {
     var config = Configuration.local([UserRealm.schema]);
     realm = Realm(config);
   }
+
 }

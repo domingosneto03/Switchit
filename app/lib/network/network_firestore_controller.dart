@@ -20,6 +20,8 @@ class TableCloudItem {
   static String fieldItemDescription = "description";
   static String fieldItemLocation = "location";
   static String fieldItemIsTraded = "traded";
+  static String fieldItemOwnerDocId = "ownerDocId";
+  static String fieldItemOwnerUsername = "ownerUsername";
   static String fieldItemImageUrl = "imageUrl";
 }
 
@@ -124,7 +126,9 @@ class NetworkFirestoreController {
       TableCloudItem.fieldItemDescription: description,
       TableCloudItem.fieldItemLocation: location,
       TableCloudItem.fieldItemIsTraded: false,
-      TableCloudItem.fieldItemImageUrl: imageUrl
+      TableCloudItem.fieldItemImageUrl: imageUrl,
+      TableCloudItem.fieldItemOwnerDocId: await DatabaseRealm().getUserDocId(),
+      TableCloudItem.fieldItemOwnerUsername: await DatabaseRealm().getUserName()
     }).then((value) {
       debugPrint("FirebaseFirestore (addItemToCloud): Item Added");
       isAddedToCloud = true;
@@ -145,17 +149,6 @@ class NetworkFirestoreController {
 
     var data = await users.doc(userDocId).collection(TableCloudItem.name).get();
 
-    var ownerData = await users.get();
-
-    String email;
-
-    for (var doc in ownerData.docs) {
-      String id = doc.id;
-      if (userDocId == id) {
-        String email = doc.get(TableCloudUser.fieldUserEmail);
-      }
-    }
-
     for (var doc in data.docs) {
       String id = doc.id;
       String name = doc.get(TableCloudItem.fieldItemName);
@@ -163,12 +156,14 @@ class NetworkFirestoreController {
       String location = doc.get(TableCloudItem.fieldItemLocation);
       bool isTraded = doc.get(TableCloudItem.fieldItemIsTraded);
       String imageUrl = doc.get(TableCloudItem.fieldItemImageUrl);
-      String email = "utilizador";
+      String ownerUsername = doc.get(TableCloudItem.fieldItemOwnerUsername);
+      String ownerDocId = doc.get(TableCloudItem.fieldItemOwnerDocId);
       debugPrint(
           "FirebaseFirestore (getItemsCurrentUserCloud): ItemDataModel-> name: $name, description: $description, location: $location, isTraded: $isTraded, imageUrl: $imageUrl");
 
       items.add(
-          ItemDataModel(id, name, description, location, isTraded, imageUrl, email));
+          ItemDataModel(id, name, description, location, isTraded, imageUrl, ownerDocId, ownerUsername)
+      );
     }
 
     debugPrint("FirebaseFirestore (getItemsCurrentUserCloud): Success");

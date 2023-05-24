@@ -11,6 +11,9 @@ class ItemDetail extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Item Details'),
+      ),
       body: Column(
         children: [
           const SizedBox(
@@ -45,9 +48,9 @@ class ItemDetail extends StatelessWidget{
                             subtitle: Text(item.description),
                           ),
                           ListTile(
-                            title: Text(item.owner),
+                            title: Text(item.ownerUsername),
                             onTap: (){
-                              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>UserDetail(email: item.owner)));
+                              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>UserDetail(ownerDocId: item.ownerDocId)));
                             },
                           ),
                         ],
