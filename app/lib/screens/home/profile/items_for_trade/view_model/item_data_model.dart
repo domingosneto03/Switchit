@@ -1,4 +1,4 @@
-import 'package:switchit/screens/home/search/view_model/user_data_model.dart';
+import 'package:switchit/models/user_data_model.dart';
 
 class ItemDataModel {
   String id = "";

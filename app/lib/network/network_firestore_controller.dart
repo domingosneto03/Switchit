@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:switchit/database/database_realm.dart';
 import 'package:switchit/screens/home/profile/items_for_trade/view_model/item_data_model.dart';
@@ -276,9 +275,10 @@ class NetworkFirestoreController {
     return itemsList;
   }
 
-<<<<<<< HEAD
+
   Future<List<UserDataModel>> getFollowersUserCloud(String? docUserId) async {
-    CollectionReference followersCollection = FirebaseFirestore.instance.collection('followers');
+    CollectionReference followersCollection =
+      FirebaseFirestore.instance.collection('followers');
     List<UserDataModel> followers = [];
 
     QuerySnapshot followerDocs = await followersCollection
@@ -288,7 +288,7 @@ class NetworkFirestoreController {
 
     for (var doc in followerDocs.docs) {
       String followerId = doc.id;
-      UserDataModel? follower = await getUserFromCloudId(followerId);
+      UserDataModel? follower = await getUserCloud(followerId);
       followers.add(follower!);
     }
     return followers;
@@ -306,7 +306,7 @@ class NetworkFirestoreController {
 
     for (var doc in followingDocs.docs) {
       String followingId = doc.id;
-      UserDataModel? following = await getUserFromCloudId(followingId);
+      UserDataModel? following = await getUserCloud(followingId);
       followings.add(following!);
     }
     return followings;
@@ -314,7 +314,7 @@ class NetworkFirestoreController {
 
   Future<UserDataModel> getUserCloud(String userDocId) async {
     CollectionReference users =
-    FirebaseFirestore.instance.collection(TableCloudUser.name);
+      FirebaseFirestore.instance.collection(TableCloudUser.name);
 
     List<ItemDataModel> itemsList = [];
 
@@ -327,16 +327,64 @@ class NetworkFirestoreController {
         String name = doc.get(TableCloudUser.fieldUserName);
         String surname = doc.get(TableCloudUser.fieldUserSurname);
         String email = doc.get(TableCloudUser.fieldUserEmail);
-
+        String photoUrl = doc.get(TableCloudUser.fieldUserPhotoUrl);
         var items = await getItemsUserCloud(doc.id);
 
         debugPrint(
             "FirebaseFirestore (getItemsCurrentUserCloud): ItemDataModel-> name: $name, surname: $surname, email: $email, items: $items");
 
-        return UserDataModel(id, name, surname, email, items);
+        return UserDataModel(
+            id: id,
+            name: name,
+            surname: surname,
+            email: email,
+            photoUrl: photoUrl,
+            items: items);
       }
     }
-    return UserDataModel("", "", "surname", "email", itemsList);
+    return UserDataModel(
+        id: "",
+        name: "",
+        surname: "surname",
+        email: "email",
+        photoUrl: "",
+        items: itemsList);
+  }
+
+  Future<void> addFollowerToCurrentUser(String followerId) async {
+    final currentUserDocId = await DatabaseRealm().getUserDocId();
+
+    final followingCollection = FirebaseFirestore.instance
+      .collection('following')
+      .doc(currentUserDocId)
+      .collection('userFollowing');
+
+    await followingCollection.doc(followerId).set({});
+
+    final followersCollection = FirebaseFirestore.instance
+      .collection('followers')
+      .doc(followerId)
+      .collection('userFollowers');
+
+    await followersCollection.doc(currentUserDocId).set({});
+  }
+
+  Future<void> removeFollowerFromCurrentUser(String otherId) async {
+    final currentUserDocId = await DatabaseRealm().getUserDocId();
+
+    final followingCollection = FirebaseFirestore.instance
+      .collection('following')
+      .doc(currentUserDocId)
+      .collection('userFollowing');
+
+    await followingCollection.doc(otherId).delete();
+
+    final followersCollection = FirebaseFirestore.instance
+      .collection('followers')
+      .doc(otherId)
+      .collection('userFollowers');
+
+    await followersCollection.doc(currentUserDocId).delete();
   }
 
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:switchit/models/user_data_model.dart';
+import 'package:switchit/network/network_firestore_controller.dart';
 
 class FollowerCard extends StatefulWidget {
   final UserDataModel follower;
@@ -11,6 +12,17 @@ class FollowerCard extends StatefulWidget {
 
 class _FollowerCardState extends State<FollowerCard> {
   bool pressed = false;
+
+  void followUser() {
+    if (pressed) {
+      NetworkFirestoreController().removeFollowerFromCurrentUser(widget.follower.id);
+    } else {
+      NetworkFirestoreController().addFollowerToCurrentUser(widget.follower.id);
+    }
+    setState(() {
+      pressed = !pressed;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,12 +50,8 @@ class _FollowerCardState extends State<FollowerCard> {
                           const BorderSide(width: 2, color: Colors.deepPurple))
                       : MaterialStateProperty.all(const BorderSide(
                           width: 0, color: Colors.transparent))),
+              onPressed: followUser,
               child: pressed ? const Text("Following") : const Text("Follow"),
-              onPressed: () {
-                setState(() {
-                  pressed = !pressed;
-                });
-              },
             ),
           ),
         ),

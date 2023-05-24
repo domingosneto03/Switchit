@@ -7,7 +7,7 @@ class UserDataModel {
   String surname = "";
   String email = "";
   String photoUrl = "";
-  Timestamp timestamp = DateTime.now() as Timestamp;
+  //Timestamp timestamp = DateTime.now() as Timestamp;
   List<ItemDataModel> items = [];
   bool isFollowing = false;
 
