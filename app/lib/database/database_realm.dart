@@ -79,11 +79,4 @@ class DatabaseRealm {
     UserRealm user = data[0];
     return user.docId;
   }
-
-  String getUserSurname()  {
-    var data = realm.all<UserRealm>();
-    UserRealm user = data[0];
-    return user.surname;
-  }
-
 }

@@ -3,9 +3,29 @@ import 'package:flutter/material.dart';
 import 'package:switchit/database/database_realm.dart';
 import 'package:switchit/network/network_firestore_controller.dart';
 
-class PostCard extends StatelessWidget {
+class PostCard extends StatefulWidget {
   final snap;
   const PostCard({Key? key, required this.snap}) : super(key: key);
+
+  @override
+  State<PostCard> createState() => _PostCardState();
+}
+
+class _PostCardState extends State<PostCard> {
+  String _surname = "";
+
+  @override
+  void initState() {
+    super.initState();
+    getSurname();
+  }
+
+  Future<void> getSurname() async {
+    var surname = await DatabaseRealm().getUserSurname();
+    setState(() {
+      _surname = surname!;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +57,7 @@ class PostCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            DatabaseRealm().getUserSurname(),
+                            _surname,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                             ),
@@ -74,7 +94,7 @@ class PostCard extends StatelessWidget {
             SizedBox(
               height: MediaQuery.of(context).size.height*0.35,
               width: double.infinity,
-              child: Image.network(snap['imageUrl'],
+              child: Image.network(widget.snap['imageUrl'],
                 fit: BoxFit.cover,
               ),
             ),
@@ -87,11 +107,11 @@ class PostCard extends StatelessWidget {
                   children: [
                     TextSpan(
                       text:
-                      DatabaseRealm().getUserSurname(),
+                      _surname,
                       style: const TextStyle(color: Colors.deepPurpleAccent, fontWeight: FontWeight.bold),
                     ),
                     TextSpan(
-                      text: ' ${snap['description']}',
+                      text: ' ${widget.snap['description']}',
                     ),
                   ],
                 ),
@@ -109,7 +129,7 @@ class PostCard extends StatelessWidget {
                       style: const TextStyle(color: Colors.deepPurpleAccent, fontWeight: FontWeight.bold),
                     ),
                     TextSpan(
-                      text: ' ${snap['date']}',
+                      text: ' ${widget.snap['date']}',
                     ),
                   ],
                 ),
@@ -127,7 +147,7 @@ class PostCard extends StatelessWidget {
                       style: const TextStyle(color: Colors.deepPurpleAccent, fontWeight: FontWeight.bold),
                     ),
                     TextSpan(
-                      text: ' ${snap['location']}',
+                      text: ' ${widget.snap['location']}',
                     ),
                   ],
                 ),
@@ -137,5 +157,4 @@ class PostCard extends StatelessWidget {
         ),
     );
   }
-
 }
