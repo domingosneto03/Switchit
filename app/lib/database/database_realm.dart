@@ -1,6 +1,7 @@
 import 'package:realm/realm.dart';
 import 'package:switchit/database/user_realm.dart';
 
+
 class DatabaseRealm {
   static final DatabaseRealm _singleton = DatabaseRealm._internal();
   late Realm realm;
@@ -53,4 +54,16 @@ class DatabaseRealm {
     var config = Configuration.local([UserRealm.schema]);
     realm = Realm(config);
   }
+  String getUserDocIds()  {
+    var data = realm.all<UserRealm>();
+    UserRealm user = data[0];
+    return user.docId;
+  }
+
+  String getUserSurname()  {
+    var data = realm.all<UserRealm>();
+    UserRealm user = data[0];
+    return user.surname;
+  }
+
 }

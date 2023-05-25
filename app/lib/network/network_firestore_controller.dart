@@ -3,8 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:switchit/database/database_realm.dart';
 import 'package:switchit/screens/home/profile/items_for_trade/view_model/item_data_model.dart';
-
 import 'package:switchit/screens/home/search/view_model/user_data_model.dart';
+import '../screens/home/create_event/view_model/event_data_model.dart';
 
 class TableCloudUser {
   static String name = "users";
@@ -23,9 +23,17 @@ class TableCloudItem {
   static String fieldItemImageUrl = "imageUrl";
 }
 
+class TableCloudEvent {
+  static String name = "events";
+  static String fieldEventDescription = "description";
+  static String fieldEventDate = "date";
+  static String fieldEventLocation = "location";
+  static String fieldEventImageUrl = "imageUrl";
+}
+
 class NetworkFirestoreController {
   static final NetworkFirestoreController _singleton =
-      NetworkFirestoreController._internal();
+  NetworkFirestoreController._internal();
 
   factory NetworkFirestoreController() {
     return _singleton;
@@ -37,7 +45,7 @@ class NetworkFirestoreController {
 
   Future<bool> addUserToCloud(String name, String surname, String email) async {
     CollectionReference users =
-        FirebaseFirestore.instance.collection(TableCloudUser.name);
+    FirebaseFirestore.instance.collection(TableCloudUser.name);
 
     var isAddedToCloud = false;
 
@@ -62,7 +70,7 @@ class NetworkFirestoreController {
 
   Future<bool> getUserFromCloud(String email) async {
     CollectionReference users =
-        FirebaseFirestore.instance.collection(TableCloudUser.name);
+    FirebaseFirestore.instance.collection(TableCloudUser.name);
 
     var success = false;
 
@@ -70,7 +78,7 @@ class NetworkFirestoreController {
         .where(TableCloudUser.fieldUserEmail, isEqualTo: email)
         .get()
         .then(
-      (querySnapshot) async {
+          (querySnapshot) async {
         var user = querySnapshot.docs.first;
         await DatabaseRealm().setUser(
             user.get(TableCloudUser.fieldUserName),
@@ -92,7 +100,7 @@ class NetworkFirestoreController {
 
   Future<bool> removeUserFromCloud(String userId) async {
     CollectionReference users =
-        FirebaseFirestore.instance.collection(TableCloudUser.name);
+    FirebaseFirestore.instance.collection(TableCloudUser.name);
 
     var isRemovedFromCloud = false;
 
@@ -113,7 +121,7 @@ class NetworkFirestoreController {
   Future<bool> addItemCurrentUserToCloud(
       String name, String description, String location, String imageUrl) async {
     CollectionReference users =
-        FirebaseFirestore.instance.collection(TableCloudUser.name);
+    FirebaseFirestore.instance.collection(TableCloudUser.name);
 
     var userDocId = await DatabaseRealm().getUserDocId();
 
@@ -139,7 +147,7 @@ class NetworkFirestoreController {
 
   Future<List<ItemDataModel>> getItemsUserCloud(String userDocId) async {
     CollectionReference users =
-        FirebaseFirestore.instance.collection(TableCloudUser.name);
+    FirebaseFirestore.instance.collection(TableCloudUser.name);
 
     List<ItemDataModel> items = [];
 
@@ -180,7 +188,7 @@ class NetworkFirestoreController {
     var userDocId = await DatabaseRealm().getUserDocId();
 
     CollectionReference users =
-        FirebaseFirestore.instance.collection(TableCloudUser.name);
+    FirebaseFirestore.instance.collection(TableCloudUser.name);
 
     var isRemovedFromCloud = false;
 
@@ -203,7 +211,7 @@ class NetworkFirestoreController {
 
   Future<List<UserDataModel>> getAllItemsCloud() async {
     CollectionReference users =
-        FirebaseFirestore.instance.collection(TableCloudUser.name);
+    FirebaseFirestore.instance.collection(TableCloudUser.name);
 
     var userDocId = await DatabaseRealm().getUserDocId();
 
@@ -270,4 +278,95 @@ class NetworkFirestoreController {
     return UserDataModel("", "", "surname", "email", itemsList);
   }
 
+
+  // Event
+
+  Future<bool> addEventCurrentUserToCloud(
+       String description,String date,  String location, String imageUrl) async {
+    CollectionReference users =
+    FirebaseFirestore.instance.collection(TableCloudUser.name);
+
+    var userDocId = await DatabaseRealm().getUserDocId();
+
+    var isAddedToCloud = false;
+
+    await users.doc(userDocId).collection(TableCloudEvent.name).add({
+      TableCloudEvent.fieldEventDescription: description,
+      TableCloudEvent.fieldEventDate: date,
+      TableCloudEvent.fieldEventLocation: location,
+      TableCloudEvent.fieldEventImageUrl: imageUrl
+    }).then((value) {
+      debugPrint("FirebaseFirestore (addEventToCloud): Event Added");
+      isAddedToCloud = true;
+    }).catchError((error) {
+      debugPrint(
+          "FirebaseFirestore (addItemToCloud): Failed to add event: $error");
+      isAddedToCloud = false;
+    });
+
+    return isAddedToCloud;
+  }
+
+  Future<List<EventDataModel>> getEventUserCloud(String userDocId) async {
+    CollectionReference users =
+    FirebaseFirestore.instance.collection(TableCloudUser.name);
+
+    List<EventDataModel> events = [];
+
+    var data = await users.doc(userDocId).collection(TableCloudEvent.name).get();
+
+    var ownerData = await users.get();
+
+    String email;
+
+    for (var doc in ownerData.docs) {
+      String id = doc.id;
+      if (userDocId == id) {
+        String email = doc.get(TableCloudUser.fieldUserEmail);
+      }
+    }
+
+    for (var doc in data.docs) {
+      String id = doc.id;
+      String description = doc.get(TableCloudEvent.fieldEventDescription);
+      String date = doc.get(TableCloudEvent.fieldEventDate);
+      String location = doc.get(TableCloudEvent.fieldEventLocation);
+      String imageUrl = doc.get(TableCloudEvent.fieldEventImageUrl);
+      String email = "utilizador";
+      debugPrint(
+          "FirebaseFirestore (getEventsCurrentUserCloud): EventDataModel->  description: $description, date: $date, location: $location, imageUrl: $imageUrl");
+
+      events.add(
+          EventDataModel(id, description, date, location, imageUrl, email));
+    }
+
+    debugPrint("FirebaseFirestore (getEventsCurrentUserCloud): Success");
+
+    return events;
+  }
+
+  Future<bool> removeEventFromCloud(String eventId) async {
+    var userDocId = await DatabaseRealm().getUserDocId();
+
+    CollectionReference users =
+    FirebaseFirestore.instance.collection(TableCloudUser.name);
+
+    var isRemovedFromCloud = false;
+
+    await users
+        .doc(userDocId)
+        .collection(TableCloudEvent.name)
+        .doc(eventId)
+        .delete()
+        .then((value) {
+      debugPrint("FirebaseFirestore (removeEventFromCloud): Event Removed");
+      isRemovedFromCloud = true;
+    }).catchError((error) {
+      debugPrint(
+          "FirebaseFirestore (removeItemFromCloud): Failed to remove event: $error");
+      isRemovedFromCloud = false;
+    });
+
+    return isRemovedFromCloud;
+  }
 }

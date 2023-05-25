@@ -10,7 +10,16 @@ class CreateEventTabScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Create event'),
+          title: const Text('Events'),
+          centerTitle: true,
+          actions: <Widget>[
+            IconButton(
+              icon: const Icon(Icons.add_circle_outline),
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const AddEvent()));
+              },
+            ),
+          ]
         ),
         body: const Body());
   }
