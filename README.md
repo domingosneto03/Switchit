@@ -47,9 +47,9 @@ We welcome any feedback and appreciate your interest in our project.
 * Xavier Maria Pimenta Santos
 
 ---
-[Back to top](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC03T3#readme)
 
-[flutter-image]: https://img.shields.io/badge/flutter-3.7.6-blue.svg
-[flutter-url]: https://flutter.dev
-[dart-image]: https://img.shields.io/badge/dart-2.19.3-40c4ff.svg
-[dart-url]: https://dart.dev
+
+[flutter-image]:(https://img.shields.io/badge/flutter-3.7.6-blue.svg)
+[flutter-url]:(https://flutter.dev)
+[dart-image]:(https://img.shields.io/badge/dart-2.19.3-40c4ff.svg)
+[dart-url]:(https://dart.dev)
