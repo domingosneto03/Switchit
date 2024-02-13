@@ -48,8 +48,10 @@ We welcome any feedback and appreciate your interest in our project.
 
 ---
 
+<img width="2056" alt="Screenshot_2023-05-23_at_19 16 58" src="https://github.com/domingosneto03/Switchit/assets/94236502/5d1bed8e-a272-49ec-857f-00e8258dbf69">
 
-[flutter-image]:(https://img.shields.io/badge/flutter-3.7.6-blue.svg)
-[flutter-url]:(https://flutter.dev)
-[dart-image]:(https://img.shields.io/badge/dart-2.19.3-40c4ff.svg)
-[dart-url]:(https://dart.dev)
+[flutter-image]: https://img.shields.io/badge/flutter-3.7.6-blue.svg
+[flutter-url]: https://flutter.dev
+[dart-image]: https://img.shields.io/badge/dart-2.19.3-40c4ff.svg
+[dart-url]: https://dart.dev
+
